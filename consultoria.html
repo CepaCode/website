@@ -11,18 +11,44 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <div class="collapse navbar-collapse justify-content-end text-right" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="consultoria.html">Consultoría</a></li>
                 <li class="nav-item"><a class="nav-link" href="english.html">English</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
+<!-- Fix for Mobile Menu -->
+<style>
+    /* Ensuring proper placement of mobile menu */
+    .navbar-nav {
+        text-align: right;
+    }
+
+    .navbar-toggler {
+        border: none;
+        outline: none;
+    }
+
+    /* Ensure dropdown appears correctly */
+    @media (max-width: 991px) {
+        .navbar-collapse {
+            position: absolute;
+            right: 0;
+            width: 100%;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    }
+</style>
 
     <!-- Main Content -->
     <div class="container mt-5 text-center">
