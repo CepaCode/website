@@ -1,5 +1,19 @@
-# Ignore macOS system files
+# Ignore system files
 .DS_Store
+Thumbs.db
 
-# Ignore images (optional, if you don't want them in GitHub)
-*.png
+# Ignore node_modules (if using JavaScript tools)
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore IDE and editor config files
+.vscode/
+.idea/
+*.swp
+
+# Ignore build or temporary files
+/dist/
+build/
+.env
