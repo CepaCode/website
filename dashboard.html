@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Cuenta - CepaCode</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">CepaCode</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="logout()">Cerrar sesión</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="container mt-5">
+    <h2 class="text-center">Bienvenido, <span id="userFullName"></span>!</h2>
+    <p class="text-center">Correo: <span id="userEmail"></span></p>
+
+    <div class="text-center mt-4">
+        <h4>Contenido exclusivo</h4>
+        <p>Aquí podrás acceder a los cursos y material especial.</p>
+        <a href="videos.html" class="btn btn-primary">Ver Videos</a>
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn btn-danger" onclick="logout()">Cerrar sesión</button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer-custom text-center mt-5 p-4">
+    <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
+</footer>
+
+<!-- Custom CSS -->
+<style>
+    .footer-custom {
+        background-color: #3a3a3a;
+        color: white;
+        width: 100%;
+        padding: 20px;
+        text-align: center;
+    }
+</style>
+
+<!-- Scripts -->
+<script>
+    // Check if user is logged in
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+        alert("No has iniciado sesión.");
+        window.location.href = "signin.html"; // Redirect to login page
+    } else {
+        document.getElementById("userFullName").innerText = user.fullname;
+        document.getElementById("userEmail").innerText = user.email;
+    }
+
+    // Logout function
+    function logout() {
+        localStorage.removeItem("user"); // Clear session
+        window.location.href = "signin.html"; // Redirect to login
+    }
+</script>
+
+</body>
+</html>
