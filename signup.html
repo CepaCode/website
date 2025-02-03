@@ -35,8 +35,7 @@ document.getElementById("signupForm").addEventListener("submit", async function(
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
-    // Hash the password before sending to Dataverse
-    const hashedPassword = btoa(password); // Simple Base64 encoding (Use a better hashing method in production)
+    const hashedPassword = btoa(password); // Basic encoding for now
 
     const data = {
         ncs_fullname: fullname,
@@ -44,18 +43,27 @@ document.getElementById("signupForm").addEventListener("submit", async function(
         ncs_password: hashedPassword
     };
 
-    // Send data to Dataverse using Power Automate Flow
-    const response = await fetch("https://prod-220.westeurope.logic.azure.com:443/workflows/f0872aae74c64f57afbd6af7be9e757d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YlmuDqRoJIF_CBfbGsgSTy3K3knYPtgzcXAS5ZYUZLcL", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch("https://prod-220.westeurope.logic.azure.com/workflows/f0872aae74c64f57afbd6af7be9e757d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=/triggers/manual/run&sv=1.0&sig=YlmuDqRoJIF_CBfbGsgSTy3K3knYPtgzcXAS5ZYUZLc", {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    if (response.ok) {
-        alert("Registrado con éxito. Ahora puedes iniciar sesión.");
-        window.location.href = "login.html";
-    } else {
-        alert("Hubo un error en el registro.");
+        if (response.ok) {
+            alert("Registrado con éxito. Ahora puedes iniciar sesión.");
+            window.location.href = "login.html";
+        } else {
+            const errorData = await response.json();
+            console.error("Error:", errorData);
+            alert("Hubo un error en el registro.");
+        }
+    } catch (error) {
+        console.error("Fetch error:", error);
+        alert("Hubo un problema de conexión.");
     }
 });
 </script>
