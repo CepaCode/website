@@ -129,6 +129,11 @@ html, body {
         window.location.href = "membership.html";
     }
 });
+function logout() {
+    console.log("Logging out..."); // Debugging step
+    localStorage.removeItem("user"); // Remove user data
+    window.location.href = "signin.html"; // Redirect to login page
+}
   </script>
 
 </body>
