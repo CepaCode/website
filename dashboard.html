@@ -30,12 +30,26 @@
     <h2 class="text-center">Bienvenido, <span id="userFullName"></span>!</h2>
     <p class="text-center">Correo: <span id="userEmail"></span></p>
 
-    <div class="text-center mt-4">
-        <h4>Contenido exclusivo</h4>
-        <p>Aquí podrás acceder a los cursos y material especial.</p>
-        <a href="videos.html" class="btn btn-primary">Ver Videos</a>
+    <!-- Regresar Button -->
+    <div class="text-center">
+        <a href="signuporsignin.html" class="btn btn-secondary">Regresar</a>
     </div>
 
+    <!-- Access Sections -->
+    <div class="row mt-4">
+        <div class="col-md-6 text-center">
+            <h4>Prácticas de Power Apps y Power Automate</h4>
+            <p>Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
+            <button class="btn btn-primary" onclick="redirectToPractices()">Acceder a Prácticas</button>
+        </div>
+        <div class="col-md-6 text-center">
+            <h4>Preparación de exámenes para certificaciones</h4>
+            <p>Prepara tus exámenes de certificación con materiales exclusivos.</p>
+            <button class="btn btn-primary" onclick="redirectToExams()">Acceder a Exámenes</button>
+        </div>
+    </div>
+
+    <!-- Logout Button -->
     <div class="text-center mt-4">
         <button class="btn btn-danger" onclick="logout()">Cerrar sesión</button>
     </div>
@@ -68,6 +82,28 @@
     } else {
         document.getElementById("userFullName").innerText = user.fullname;
         document.getElementById("userEmail").innerText = user.email;
+    }
+
+    // Redirect to appropriate practice page based on user's subscription
+    function redirectToPractices() {
+        if (user.subscription === "pro") {
+            window.location.href = "cepacodepro.html";
+        } else if (user.subscription === "builder") {
+            window.location.href = "cepacodebuilder.html";
+        } else {
+            alert("No tienes acceso. Por favor suscríbete para acceder a las prácticas.");
+        }
+    }
+
+    // Redirect to appropriate exam page based on user's subscription
+    function redirectToExams() {
+        if (user.subscription === "pro") {
+            window.location.href = "cepacodepro.html";
+        } else if (user.subscription === "student") {
+            window.location.href = "cepacodestudent.html";
+        } else {
+            alert("No tienes acceso. Por favor suscríbete para acceder a los exámenes.");
+        }
     }
 
     // Logout function
