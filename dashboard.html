@@ -82,59 +82,53 @@ html, body {
 <!-- Scripts -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    // Retrieve logged-in user data
-    const userData = localStorage.getItem("user");
-    console.log("Retrieved from localStorage:", userData);
+        const userData = localStorage.getItem("user");
+        console.log("Retrieved from localStorage:", userData);
 
-    if (!userData) {
-        alert("¡No has iniciado sesión!");
+        if (!userData) {
+            alert("¡No has iniciado sesión!");
+            window.location.href = "signin.html"; // Redirect to login page
+            return;
+        }
+
+        const user = JSON.parse(userData);
+        console.log("Parsed user data:", user); // Debugging step
+        document.getElementById("userFullName").innerText = user.fullname;
+
+        const practicesSection = document.getElementById("practicesSection");
+        const examsSection = document.getElementById("examsSection");
+
+        if (!practicesSection || !examsSection) {
+            console.error("One or more sections are missing from the DOM!");
+            return;
+        }
+
+        console.log("User subscription:", user.subscription);
+        practicesSection.style.display = "none";
+        examsSection.style.display = "none";
+
+        if (user.subscription === "pro") {
+            console.log("User is PRO - Showing both sections");
+            practicesSection.style.display = "block";
+            examsSection.style.display = "block";
+        } else if (user.subscription === "builder") {
+            console.log("User is BUILDER - Showing only Practices");
+            practicesSection.style.display = "block";
+        } else if (user.subscription === "student") {
+            console.log("User is STUDENT - Showing only Exams");
+            examsSection.style.display = "block";
+        } else {
+            console.log("User has NO VALID SUBSCRIPTION - Redirecting to membership page");
+            window.location.href = "membership.html";
+        }
+    });
+
+    function logout() {
+        console.log("Logging out..."); // Debugging step
+        localStorage.removeItem("user"); // Remove user data
         window.location.href = "signin.html"; // Redirect to login page
-        return;
     }
-
-    const user = JSON.parse(userData);
-    console.log("Parsed user data:", user); // Debugging step
-    document.getElementById("userFullName").innerText = user.fullname;
-
-    // Get elements
-    const practicesSection = document.getElementById("practicesSection");
-    const examsSection = document.getElementById("examsSection");
-
-    // Ensure they exist before modifying styles
-    if (!practicesSection || !examsSection) {
-        console.error("One or more sections are missing from the DOM!");
-        return;
-    }
-
-    // Debugging: Log subscription value
-    console.log("User subscription:", user.subscription);
-
-    // Ensure all sections are hidden first
-    practicesSection.style.display = "none";
-    examsSection.style.display = "none";
-
-    // Check subscription type and show the correct section
-    if (user.subscription === "pro") {
-        console.log("User is PRO - Showing both sections");
-        practicesSection.style.display = "block";
-        examsSection.style.display = "block";
-    } else if (user.subscription === "builder") {
-        console.log("User is BUILDER - Showing only Practices");
-        practicesSection.style.display = "block";
-    } else if (user.subscription === "student") {
-        console.log("User is STUDENT - Showing only Exams");
-        examsSection.style.display = "block";
-    } else {
-        console.log("User has NO VALID SUBSCRIPTION - Redirecting to membership page");
-        window.location.href = "membership.html";
-    }
-});
-function logout() {
-    console.log("Logging out..."); // Debugging step
-    localStorage.removeItem("user"); // Remove user data
-    window.location.href = "signin.html"; // Redirect to login page
-}
-  </script>
+</script>
 
 </body>
 </html>
