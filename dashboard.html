@@ -28,30 +28,26 @@
 <!-- Dashboard Content -->
 <div class="container mt-5">
     <h2 class="text-center">Bienvenido, <span id="userFullName"></span>!</h2>
-    <p class="text-center">Correo: <span id="userEmail"></span></p>
 
-    <!-- Regresar Button -->
-    <div class="text-center">
-        <a href="signuporsignin.html" class="btn btn-secondary">Regresar</a>
-    </div>
-
-    <!-- Access Sections -->
+    <!-- Access Sections with Cards -->
     <div class="row mt-4">
-        <div class="col-md-6 text-center">
-            <h4>Prácticas de Power Apps y Power Automate</h4>
-            <p>Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
-            <button class="btn btn-primary" onclick="redirectToPractices()">Acceder a Prácticas</button>
+        <!-- Prácticas -->
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-lg p-4 mb-4">
+                <h4 class="text-center">Prácticas de Power Apps y Power Automate</h4>
+                <p class="text-center">Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
+                <button class="btn btn-primary btn-block" onclick="redirectToPractices()">Acceder a Prácticas</button>
+            </div>
         </div>
-        <div class="col-md-6 text-center">
-            <h4>Preparación de exámenes para certificaciones</h4>
-            <p>Prepara tus exámenes de certificación con materiales exclusivos.</p>
-            <button class="btn btn-primary" onclick="redirectToExams()">Acceder a Exámenes</button>
-        </div>
-    </div>
 
-    <!-- Logout Button -->
-    <div class="text-center mt-4">
-        <button class="btn btn-danger" onclick="logout()">Cerrar sesión</button>
+        <!-- Exámenes -->
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-lg p-4">
+                <h4 class="text-center">Preparación de exámenes para certificaciones</h4>
+                <p class="text-center">Prepara tus exámenes de certificación con materiales exclusivos.</p>
+                <button class="btn btn-primary btn-block" onclick="redirectToExams()">Acceder a Exámenes</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -73,18 +69,17 @@
 
 <!-- Scripts -->
 <script>
-    // Check if user is logged in
+    // Retrieve logged-in user data
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user) {
+    if (!user || !user.fullname) {
         alert("No has iniciado sesión.");
         window.location.href = "signin.html"; // Redirect to login page
     } else {
-        document.getElementById("userFullName").innerText = user.fullname;
-        document.getElementById("userEmail").innerText = user.email;
+        document.getElementById("userFullName").innerText = user.fullname; 
     }
 
-    // Redirect to appropriate practice page based on user's subscription
+    // Redirect based on user subscription
     function redirectToPractices() {
         if (user.subscription === "pro") {
             window.location.href = "cepacodepro.html";
@@ -95,7 +90,6 @@
         }
     }
 
-    // Redirect to appropriate exam page based on user's subscription
     function redirectToExams() {
         if (user.subscription === "pro") {
             window.location.href = "cepacodepro.html";
@@ -106,10 +100,9 @@
         }
     }
 
-    // Logout function
     function logout() {
-        localStorage.removeItem("user"); // Clear session
-        window.location.href = "signin.html"; // Redirect to login
+        localStorage.removeItem("user"); 
+        window.location.href = "signin.html"; 
     }
 </script>
 
