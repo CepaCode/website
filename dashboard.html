@@ -27,7 +27,7 @@
 
 <!-- Dashboard Content -->
 <div class="container mt-5">
-    <h2 class="text-center">Bienvenido, <span id="userFullName"></span>!</h2>
+    <h2 class="text-center">¡Bienvenid@, <span id="userFullName"></span>!</h2>
 
     <!-- Access Sections with Cards -->
     <div class="row mt-4">
@@ -81,44 +81,66 @@ html, body {
 
 <!-- Scripts -->
 <script>
-  // Retrieve logged-in user data
-const userData = localStorage.getItem("user");
-console.log("Retrieved from localStorage:", userData);
-
-if (!userData) {
-    alert("¡No has iniciado sesión!");
-    window.location.href = "signin.html"; // Redirect to login page
-} else {
-    const user = JSON.parse(userData);
-    document.getElementById("userFullName").innerText = user.fullname;
-}
-
-    // Redirect based on user subscription
-    function redirectToPractices() {
-        if (user.subscription === "pro") {
-            window.location.href = "cepacodepro.html";
-        } else if (user.subscription === "builder") {
-            window.location.href = "cepacodebuilder.html";
-        } else {
-            alert("No tienes acceso. Por favor suscríbete para acceder a las prácticas.");
-        }
-    }
-
-    function redirectToExams() {
-        if (user.subscription === "pro") {
-            window.location.href = "cepacodepro.html";
-        } else if (user.subscription === "student") {
-            window.location.href = "cepacodestudent.html";
-        } else {
-            alert("No tienes acceso. Por favor suscríbete para acceder a los exámenes.");
-        }
-    }
-
-    function logout() {
-        localStorage.removeItem("user"); 
-        window.location.href = "signin.html"; 
-    }
-</script>
+    // Retrieve logged-in user data
+  const userData = localStorage.getItem("user");
+  console.log("Retrieved from localStorage:", userData);
+  
+  if (!userData) {
+      alert("¡No has iniciado sesión!");
+      window.location.href = "signin.html"; // Redirect to login page
+  } else {
+      const user = JSON.parse(userData);
+      document.getElementById("userFullName").innerText = user.fullname;
+  
+      // Get elements
+      const practicesSection = document.getElementById("practicesSection");
+      const examsSection = document.getElementById("examsSection");
+  
+      // Check subscription type
+      if (user.subscription === "pro") {
+          // Show both sections
+          practicesSection.style.display = "block";
+          examsSection.style.display = "block";
+      } else if (user.subscription === "builder") {
+          // Show only practices
+          practicesSection.style.display = "block";
+          examsSection.style.display = "none";
+      } else if (user.subscription === "student") {
+          // Show only exams
+          practicesSection.style.display = "none";
+          examsSection.style.display = "block";
+      } else {
+          // Redirect to membership page if no valid subscription
+          window.location.href = "membership.html";
+      }
+  }
+  
+      // Redirect based on user subscription
+      function redirectToPractices() {
+          if (user.subscription === "pro") {
+              window.location.href = "cepacodepro.html";
+          } else if (user.subscription === "builder") {
+              window.location.href = "cepacodebuilder.html";
+          } else {
+              alert("No tienes acceso. Por favor suscríbete para acceder a las prácticas.");
+          }
+      }
+  
+      function redirectToExams() {
+          if (user.subscription === "pro") {
+              window.location.href = "cepacodepro.html";
+          } else if (user.subscription === "student") {
+              window.location.href = "cepacodestudent.html";
+          } else {
+              alert("No tienes acceso. Por favor suscríbete para acceder a los exámenes.");
+          }
+      }
+  
+      function logout() {
+          localStorage.removeItem("user"); 
+          window.location.href = "signin.html"; 
+      }
+  </script>
 
 </body>
 </html>
