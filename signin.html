@@ -23,13 +23,13 @@
     </form>
 </div>
 
+<script>
 document.getElementById("loginForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
-
-    const hashedPassword = btoa(password); // Encode password (matches sign-up process)
+    const hashedPassword = btoa(password); // Encoding the password as done in signup
 
     const data = {
         ncs_email: email,
@@ -47,21 +47,17 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         });
 
         const result = await response.json();
-        console.log("API Response:", result); // Debugging
 
         if (response.ok && result.status === "success") {
-            alert("Has iniciado sesión.");
+            alert("¡Has iniciado sesión!");
 
-            // ✅ Store user data correctly
+            // Store user data correctly
             const userData = {
                 fullname: result.fullname, 
                 subscription: result.subscription
             };
 
             localStorage.setItem("user", JSON.stringify(userData));
-
-            // Debugging step
-            console.log("Stored user in localStorage:", localStorage.getItem("user"));
 
             window.location.href = "dashboard.html"; // Redirect to the private area
         } else {
@@ -72,6 +68,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         alert("Hubo un problema de conexión.");
     }
 });
+</script>
 
 </body>
 </html>
