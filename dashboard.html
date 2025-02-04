@@ -81,15 +81,17 @@ html, body {
 
 <!-- Scripts -->
 <script>
-    // Retrieve logged-in user data
-    const user = JSON.parse(localStorage.getItem("user"));
+  // Retrieve logged-in user data
+const userData = localStorage.getItem("user");
+console.log("Retrieved from localStorage:", userData);
 
-    if (!user || !user.fullname) {
-        alert("No has iniciado sesión.");
-        window.location.href = "signin.html"; // Redirect to login page
-    } else {
-        document.getElementById("userFullName").innerText = user.fullname; 
-    }
+if (!userData) {
+    alert("¡No has iniciado sesión!");
+    window.location.href = "signin.html"; // Redirect to login page
+} else {
+    const user = JSON.parse(userData);
+    document.getElementById("userFullName").innerText = user.fullname;
+}
 
     // Redirect based on user subscription
     function redirectToPractices() {

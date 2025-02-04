@@ -48,13 +48,23 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
         });
 
         const result = await response.json();
+        console.log("API Response:", result); // Debugging
 
         if (response.ok && result.status === "success") {
             alert("Has iniciado sesión.");
-            localStorage.setItem("user", JSON.stringify({
-    fullname: result.fullname, 
-    subscription: result.subscription
-}));            window.location.href = "dashboard.html"; // Redirect to the private area
+
+            // ✅ Store user data correctly
+            const userData = {
+                fullname: result.fullname, 
+                subscription: result.subscription
+            };
+
+            localStorage.setItem("user", JSON.stringify(userData));
+
+            // Debugging step
+            console.log("Stored user in localStorage:", localStorage.getItem("user"));
+
+            window.location.href = "dashboard.html"; // Redirect to the private area
         } else {
             alert("Correo o contraseña incorrectos.");
         }
