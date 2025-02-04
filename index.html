@@ -65,17 +65,23 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
-
-<!-- WhatsApp Contact -->
-<div class="text-center mt-4">
-    <button id="whatsappButton" class="btn btn-success btn-lg" onclick="revealNumber()">
-        <i class="fab fa-whatsapp"></i> Contactar
-    </button>
-    <p id="phoneNumber" class="mt-3 text-success font-weight-bold" style="display: none; font-size: 18px;">
-        <i class="fab fa-whatsapp"></i> +34 623 958 609
-    </p>
+<!-- Action Buttons -->
+<div class="container text-center mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <a href="https://outlook.office.com/bookwithme/user/348a0b316f494e1bd118a2b18873830%40cepacode.com/meetingtype/BM3lY72gB0IFWstld1-gzQ2?anonymous"
+                class="btn btn-dark btn-lg btn-block">
+                <i class="fas fa-handshake"></i> Trabajemos juntos
+            </a>
+        </div>
+        <div class="col-md-4">
+            <a href="https://outlook.office.com/bookwithme/user/348a0b316f494e1bd118a2b18873830%40cepacode.com/meetingtype/LFDJbSNzV0KhEOjDs-K0tQ2?anonymous"
+                class="btn btn-primary btn-lg btn-block">
+                <i class="fas fa-coffee"></i> Tomemos café
+            </a>
+        </div>
+    </div>
 </div>
-
 <script>
     function revealNumber() {
         document.getElementById("phoneNumber").style.display = "block";
@@ -100,8 +106,8 @@
     }
 
     .carousel-container img {
-        max-height: 250;
-        max-width: 400;
+        max-height: 250px;
+        max-width: 400px;
     }
 
     /* Mobile-Friendly Navbar */
