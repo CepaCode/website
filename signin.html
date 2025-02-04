@@ -51,8 +51,10 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
 
         if (response.ok && result.status === "success") {
             alert("Has iniciado sesión.");
-            localStorage.setItem("user", JSON.stringify(result.user)); // Store session
-            window.location.href = "dashboard.html"; // Redirect to the private area
+            localStorage.setItem("user", JSON.stringify({
+    fullname: result.fullname, 
+    subscription: result.subscription
+}));            window.location.href = "dashboard.html"; // Redirect to the private area
         } else {
             alert("Correo o contraseña incorrectos.");
         }
