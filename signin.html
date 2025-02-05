@@ -60,12 +60,19 @@
             console.log("API Response:", result); // Debugging
     
             if (response.ok && result.status === "success") {
-                alert("Has iniciado sesión.");
-                localStorage.setItem("user", JSON.stringify({
-                    fullname: result.ncs_fullname, 
-                    subscription: result.subscription
-                }));  
-                window.location.href = "dashboard.html"; // Redirect to dashboard
+    console.log("API Response:", JSON.stringify(result, null, 2)); // Debugging step
+
+    // Ensure the fullname is correctly stored
+    const userData = {
+        fullname: result.fullname || "MISSING_FULLNAME",
+        subscription: result.subscription || "MISSING_SUBSCRIPTION"
+    };
+
+    console.log("User Data to Store:", userData); // Debugging step
+    localStorage.setItem("user", JSON.stringify(userData));
+
+    window.location.href = "dashboard.html";
+} // Redirect to dashboard
             } else {
                 alert("Correo o contraseña incorrectos.");
                 resetForm(); // Re-enable fields and button
