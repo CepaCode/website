@@ -60,23 +60,24 @@
             console.log("API Response:", result); // Debugging
     
             if (response.ok && result.status === "success") {
-    console.log("API Response:", JSON.stringify(result, null, 2)); // Debugging step
-
+    console.log("Full API Response:", result);
+    
     // Ensure the fullname is correctly stored
     const userData = {
-        fullname: result.fullname || "MISSING_FULLNAME",
-        subscription: result.subscription || "MISSING_SUBSCRIPTION"
+        fullname: result.fullname ? result.fullname.trim() : "MISSING_FULLNAME",
+        subscription: result.subscription ? result.subscription.trim() : "MISSING_SUBSCRIPTION"
     };
 
-    console.log("User Data to Store:", userData); // Debugging step
+    console.log("Storing in localStorage:", userData); // Debugging step
     localStorage.setItem("user", JSON.stringify(userData));
 
-    window.location.href = "dashboard.html";
-} // Redirect to dashboard
-            } else {
-                alert("Correo o contraseña incorrectos.");
-                resetForm(); // Re-enable fields and button
-            }
+    console.log("User Data to Store:", userData); // Debugging step
+    window.location.href = "dashboard.html"; // Redirect to dashboard
+
+} else {
+    alert("Correo o contraseña incorrectos.");
+    resetForm(); // Re-enable fields and button
+}
         } catch (error) {
             console.error("Fetch error:", error);
             alert("Hubo un problema de conexión.");
