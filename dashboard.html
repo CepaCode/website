@@ -5,6 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Cuenta - CepaCode</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ensure full-height layout */
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1; /* Pushes footer down */
+        }
+
+        .footer-custom {
+            background-color: #3a3a3a;
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto; /* Ensures footer stays at bottom */
+        }
+
+        /* Style for 'Adquirir' button */
+        .btn-adquirir {
+            background-color: white !important;
+            color: #007bff !important;
+            border: 1px solid #007bff !important;
+        }
+
+        .btn-adquirir:hover {
+            background-color: #007bff !important;
+            color: white !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -31,111 +64,75 @@
 
     <!-- Access Sections with Cards -->
     <div class="row mt-4">
-       <!-- Prácticas -->
-<div class="col-md-6 offset-md-3">
-    <div class="card shadow-lg p-4 mb-4">
-        <h4 class="text-center">Prácticas de Power Apps y Power Automate</h4>
-        <p class="text-center">Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
-        <button id="practicesButton" class="btn btn-primary btn-block">Acceder a Prácticas</button>
+        <!-- Prácticas -->
+        <div class="col-md-6 offset-md-3" id="practicesSection">
+            <div class="card shadow-lg p-4 mb-4">
+                <h4 class="text-center">Prácticas de Power Apps y Power Automate</h4>
+                <p class="text-center">Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
+                <button id="practicesButton" class="btn btn-primary btn-block">Acceder a Prácticas</button>
+            </div>
+        </div>
+
+        <!-- Exámenes -->
+        <div class="col-md-6 offset-md-3" id="examsSection">
+            <div class="card shadow-lg p-4">
+                <h4 class="text-center">Preparación de exámenes para certificaciones</h4>
+                <p class="text-center">Prepara tus exámenes de certificación con materiales exclusivos.</p>
+                <button id="examsButton" class="btn btn-primary btn-block">Acceder a Exámenes</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- Exámenes -->
-<div class="col-md-6 offset-md-3">
-    <div class="card shadow-lg p-4">
-        <h4 class="text-center">Preparación de exámenes para certificaciones</h4>
-        <p class="text-center">Prepara tus exámenes de certificación con materiales exclusivos.</p>
-        <button id="examsButton" class="btn btn-primary btn-block">Acceder a Exámenes</button>
-    </div>
-</div>
 <!-- Footer -->
-<footer class="footer-custom text-center mt-5 p-4">
+<footer class="footer-custom text-center">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
 </footer>
 
-<!-- Custom CSS -->
-<style>
- /* Ensure the footer sticks to the bottom */
-html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container {
-    flex: 1; /* Pushes footer down */
-}
-
-.footer-custom {
-    background-color: #3a3a3a;
-    color: white;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    margin-top: auto; /* Ensures footer is pushed to bottom */
-}
-</style>
-
 <!-- Scripts -->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Retrieve logged-in user data
-        const userData = localStorage.getItem("user");
-        console.log("Retrieved from localStorage:", userData);
-    
-        if (!userData) {
-            alert("¡No has iniciado sesión!");
-            window.location.href = "signin.html"; // Redirect to login page
-            return;
-        }
-    
-        const user = JSON.parse(userData);
-        document.getElementById("userFullName").innerText = user.fullname;
-    
-        const practicesButton = document.getElementById("practicesButton");
-        const examsButton = document.getElementById("examsButton");
-    
-        if (user.subscription === "pro") {
-            // Pro users get full access
-            practicesButton.innerText = "Acceder a Prácticas";
-            practicesButton.onclick = function () {
-                window.location.href = "cepacodepro.html";
-            };
-    
-            examsButton.innerText = "Acceder a Exámenes";
-            examsButton.onclick = function () {
-                window.location.href = "cepacodepro.html";
-            };
-    
-        } else if (user.subscription === "student") {
-            // Student users get exams, but need to purchase practices
-            practicesButton.innerText = "Adquirir";
-            practicesButton.onclick = function () {
-                window.location.href = "membership.html";
-            };
-    
-            examsButton.innerText = "Acceder a Exámenes";
-            examsButton.onclick = function () {
-                window.location.href = "cepacodestudent.html";
-            };
-    
-        } else if (user.subscription === "builder") {
-            // Builder users get practices, but need to purchase exams
-            practicesButton.innerText = "Acceder a Prácticas";
-            practicesButton.onclick = function () {
-                window.location.href = "cepacodebuilder.html";
-            };
-    
-            examsButton.innerText = "Adquirir";
-            examsButton.onclick = function () {
-                window.location.href = "membership.html";
-            };
-    
-        } else {
-            // If no valid subscription, redirect to membership
-            window.location.href = "membership.html";
-        }
-    });
-    </script>
+  // Retrieve logged-in user data
+  const userData = localStorage.getItem("user");
+
+  if (!userData) {
+      alert("¡No has iniciado sesión!");
+      window.location.href = "signin.html"; // Redirect to login page
+  } else {
+      const user = JSON.parse(userData);
+      document.getElementById("userFullName").innerText = user.fullname || "Usuario";
+
+      // Handle subscription-based visibility
+      const practicesSection = document.getElementById("practicesSection");
+      const examsSection = document.getElementById("examsSection");
+      const practicesButton = document.getElementById("practicesButton");
+      const examsButton = document.getElementById("examsButton");
+
+      if (user.subscription === "pro") {
+          // Show both sections as usual
+          practicesButton.onclick = () => window.location.href = "cepacodepro.html";
+          examsButton.onclick = () => window.location.href = "cepacodepro.html";
+      } else if (user.subscription === "builder") {
+          // Show Prácticas, but Exams should be "Adquirir"
+          examsButton.innerText = "Adquirir";
+          examsButton.onclick = () => window.location.href = "membership.html";
+          examsButton.classList.add("btn-adquirir"); // Apply inverted color styling
+      } else if (user.subscription === "student") {
+          // Show Exámenes, but Prácticas should be "Adquirir"
+          practicesButton.innerText = "Adquirir";
+          practicesButton.onclick = () => window.location.href = "membership.html";
+          practicesButton.classList.add("btn-adquirir"); // Apply inverted color styling
+      } else {
+          // No valid subscription, redirect to membership page
+          window.location.href = "membership.html";
+      }
+  }
+
+  // Logout function
+  function logout() {
+      localStorage.removeItem("user"); 
+      window.location.href = "signin.html"; 
+  }
+</script>
+
 </body>
 </html>
