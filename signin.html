@@ -3,11 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión</title>
+    <title>Iniciar Sesión - CepaCode</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ensure full-height layout */
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1; /* Pushes footer down */
+        }
+
+        .footer-custom {
+            background-color: #3a3a3a;
+            color: white;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            margin-top: auto; /* Ensures footer stays at bottom */
+        }
+    </style>
 </head>
 <body>
 
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">
+            <img src="homeheader.png" alt="CepaCode Logo" height="40">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Login Form -->
 <div class="container mt-5">
     <h2 class="text-center">Iniciar Sesión</h2>
     <form id="loginForm">
@@ -23,6 +63,12 @@
     </form>
 </div>
 
+<!-- Footer -->
+<footer class="footer-custom text-center">
+    <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
+</footer>
+
+<!-- Scripts -->
 <script>
     document.getElementById("loginForm").addEventListener("submit", async function(event) {
         event.preventDefault();
@@ -31,15 +77,15 @@
         const passwordInput = document.getElementById("password");
         const loginButton = document.getElementById("loginButton");
     
-        // Disable inputs and button
+        // Disable inputs and button while processing
         emailInput.disabled = true;
         passwordInput.disabled = true;
         loginButton.disabled = true;
-        loginButton.innerText = "Validando..."; // Change button text while processing
+        loginButton.innerText = "Validando...";
     
         const email = emailInput.value;
         const password = passwordInput.value;
-        const hashedPassword = btoa(password); // Encode password (matches sign-up process)
+        const hashedPassword = btoa(password);
     
         const data = {
             ncs_email: email,
@@ -57,45 +103,33 @@
             });
     
             const result = await response.json();
-            console.log("API Response:", result); // Debugging
+            console.log("API Response:", result);
     
             if (response.ok && result.status === "success") {
-    console.log("Full API Response:", result);
-    
-    // Ensure the fullname is correctly stored
-    const userData = {
-        fullname: result.fullname ? result.fullname.trim() : "MISSING_FULLNAME",
-        subscription: result.subscription ? result.subscription.trim() : "MISSING_SUBSCRIPTION"
-    };
-
-    console.log("Storing in localStorage:", userData); // Debugging step
-    localStorage.setItem("user", JSON.stringify(userData));
-
-    console.log("User Data to Store:", userData); // Debugging step
-    window.location.href = "dashboard.html"; // Redirect to dashboard
-
-} else {
-    alert("Correo o contraseña incorrectos.");
-    resetForm(); // Re-enable fields and button
-}
+                alert("Has iniciado sesión.");
+                localStorage.setItem("user", JSON.stringify({
+                    fullname: result.fullname, 
+                    subscription: result.subscription
+                }));  
+                window.location.href = "dashboard.html";
+            } else {
+                alert("Correo o contraseña incorrectos.");
+                emailInput.disabled = false;
+                passwordInput.disabled = false;
+                loginButton.disabled = false;
+                loginButton.innerText = "Ingresar";
+            }
         } catch (error) {
             console.error("Fetch error:", error);
             alert("Hubo un problema de conexión.");
-            resetForm(); // Re-enable fields and button
+    
+            emailInput.disabled = false;
+            passwordInput.disabled = false;
+            loginButton.disabled = false;
+            loginButton.innerText = "Ingresar";
         }
     });
-    
-    // Function to re-enable form fields after failure
-    function resetForm() {
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const loginButton = document.getElementById("loginButton");
-    
-        emailInput.disabled = false;
-        passwordInput.disabled = false;
-        loginButton.disabled = false;
-        loginButton.innerText = "Ingresar"; // Reset button text
-    }
-    </script>
+</script>
+
 </body>
 </html>
