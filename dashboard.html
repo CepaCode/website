@@ -31,26 +31,23 @@
 
     <!-- Access Sections with Cards -->
     <div class="row mt-4">
-        <!-- Prácticas -->
-<div class="col-md-6 offset-md-3" id="practicesSection" style="display: none;">
+       <!-- Prácticas -->
+<div class="col-md-6 offset-md-3">
     <div class="card shadow-lg p-4 mb-4">
         <h4 class="text-center">Prácticas de Power Apps y Power Automate</h4>
         <p class="text-center">Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
-        <button class="btn btn-primary btn-block" onclick="redirectToPractices()">Acceder a Prácticas</button>
+        <button id="practicesButton" class="btn btn-primary btn-block">Acceder a Prácticas</button>
     </div>
 </div>
 
 <!-- Exámenes -->
-<div class="col-md-6 offset-md-3" id="examsSection" style="display: none;">
+<div class="col-md-6 offset-md-3">
     <div class="card shadow-lg p-4">
         <h4 class="text-center">Preparación de exámenes para certificaciones</h4>
         <p class="text-center">Prepara tus exámenes de certificación con materiales exclusivos.</p>
-        <button class="btn btn-primary btn-block" onclick="redirectToExams()">Acceder a Exámenes</button>
+        <button id="examsButton" class="btn btn-primary btn-block">Acceder a Exámenes</button>
     </div>
 </div>
-    </div>
-</div>
-
 <!-- Footer -->
 <footer class="footer-custom text-center mt-5 p-4">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
@@ -82,53 +79,63 @@ html, body {
 <!-- Scripts -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        // Retrieve logged-in user data
         const userData = localStorage.getItem("user");
         console.log("Retrieved from localStorage:", userData);
-
+    
         if (!userData) {
             alert("¡No has iniciado sesión!");
             window.location.href = "signin.html"; // Redirect to login page
             return;
         }
-
+    
         const user = JSON.parse(userData);
-        console.log("Parsed user data:", user); // Debugging step
         document.getElementById("userFullName").innerText = user.fullname;
-
-        const practicesSection = document.getElementById("practicesSection");
-        const examsSection = document.getElementById("examsSection");
-
-        if (!practicesSection || !examsSection) {
-            console.error("One or more sections are missing from the DOM!");
-            return;
-        }
-
-        console.log("User subscription:", user.subscription);
-        practicesSection.style.display = "none";
-        examsSection.style.display = "none";
-
+    
+        const practicesButton = document.getElementById("practicesButton");
+        const examsButton = document.getElementById("examsButton");
+    
         if (user.subscription === "pro") {
-            console.log("User is PRO - Showing both sections");
-            practicesSection.style.display = "block";
-            examsSection.style.display = "block";
-        } else if (user.subscription === "builder") {
-            console.log("User is BUILDER - Showing only Practices");
-            practicesSection.style.display = "block";
+            // Pro users get full access
+            practicesButton.innerText = "Acceder a Prácticas";
+            practicesButton.onclick = function () {
+                window.location.href = "cepacodepro.html";
+            };
+    
+            examsButton.innerText = "Acceder a Exámenes";
+            examsButton.onclick = function () {
+                window.location.href = "cepacodepro.html";
+            };
+    
         } else if (user.subscription === "student") {
-            console.log("User is STUDENT - Showing only Exams");
-            examsSection.style.display = "block";
+            // Student users get exams, but need to purchase practices
+            practicesButton.innerText = "Adquirir";
+            practicesButton.onclick = function () {
+                window.location.href = "membership.html";
+            };
+    
+            examsButton.innerText = "Acceder a Exámenes";
+            examsButton.onclick = function () {
+                window.location.href = "cepacodestudent.html";
+            };
+    
+        } else if (user.subscription === "builder") {
+            // Builder users get practices, but need to purchase exams
+            practicesButton.innerText = "Acceder a Prácticas";
+            practicesButton.onclick = function () {
+                window.location.href = "cepacodebuilder.html";
+            };
+    
+            examsButton.innerText = "Adquirir";
+            examsButton.onclick = function () {
+                window.location.href = "membership.html";
+            };
+    
         } else {
-            console.log("User has NO VALID SUBSCRIPTION - Redirecting to membership page");
+            // If no valid subscription, redirect to membership
             window.location.href = "membership.html";
         }
     });
-
-    function logout() {
-        console.log("Logging out..."); // Debugging step
-        localStorage.removeItem("user"); // Remove user data
-        window.location.href = "signin.html"; // Redirect to login page
-    }
-</script>
-
+    </script>
 </body>
 </html>
