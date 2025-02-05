@@ -35,7 +35,7 @@
         emailInput.disabled = true;
         passwordInput.disabled = true;
         loginButton.disabled = true;
-        loginButton.innerText = "Validando..."; // Change button text to indicate processing
+        loginButton.innerText = "Validando..."; // Change button text while processing
     
         const email = emailInput.value;
         const password = passwordInput.value;
@@ -68,24 +68,26 @@
                 window.location.href = "dashboard.html"; // Redirect to dashboard
             } else {
                 alert("Correo o contraseña incorrectos.");
-                // Re-enable inputs and button if login fails
-                emailInput.disabled = false;
-                passwordInput.disabled = false;
-                loginButton.disabled = false;
-                loginButton.innerText = "Ingresar"; // Reset button text
+                resetForm(); // Re-enable fields and button
             }
         } catch (error) {
             console.error("Fetch error:", error);
             alert("Hubo un problema de conexión.");
-    
-            // Re-enable inputs and button if there's a connection issue
-            emailInput.disabled = false;
-            passwordInput.disabled = false;
-            loginButton.disabled = false;
-            loginButton.innerText = "Ingresar"; // Reset button text
+            resetForm(); // Re-enable fields and button
         }
     });
+    
+    // Function to re-enable form fields after failure
+    function resetForm() {
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const loginButton = document.getElementById("loginButton");
+    
+        emailInput.disabled = false;
+        passwordInput.disabled = false;
+        loginButton.disabled = false;
+        loginButton.innerText = "Ingresar"; // Reset button text
+    }
     </script>
-
 </body>
 </html>
