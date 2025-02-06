@@ -93,13 +93,11 @@
   document.getElementById("signupForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    // 🔹 Get Form Values
     const fullname = document.getElementById("fullname").value.trim();
     const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    // 🔹 Frontend Validations
     if (!fullname || !email || !password || !confirmPassword) {
         alert("Por favor, completa todos los campos.");
         return;
@@ -109,7 +107,6 @@
         return;
     }
 
-    // 🔹 Encode Password (Base64)
     const hashedPassword = btoa(password); 
 
     const data = {
@@ -121,8 +118,7 @@
     console.log("📡 Sending Signup Request:", JSON.stringify(data));
 
     try {
-        // Make API Call
-        const response = await fetch("https://prod-220.westeurope.logic.azure.com:443/workflows/f0872aae74c64f57afbd6af7be9e757d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YlmuDqRoJIF_CBfbGsgSTy3K3knYPtgzcXAS5ZYUZLc", {
+        const response = await fetch("https://prod-220.westeurope.logic.azure.com/workflows/f0872aae74c64f57afbd6af7be9e757d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YlmuDqRoJIF_CBfbGsgSTy3K3knYPtgzcXAS5ZYUZLc", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
@@ -133,36 +129,20 @@
 
         console.log("📡 Response Status:", response.status);
 
-        // Check if response is empty
-        const textResponse = await response.text();
-        console.log("📡 Raw API Response:", textResponse);
-
-        if (!textResponse.trim()) {
-            alert("Error: No response from server.");
+        // ✅ Ensure the response is properly parsed
+        if (!response.ok) {
+            alert("Hubo un problema: " + response.statusText);
             return;
         }
 
-        // Try parsing JSON Response
-        let result;
-        try {
-            result = JSON.parse(textResponse);
-        } catch (error) {
-            console.error("❌ JSON Parsing Error:", error);
-            alert("Hubo un problema con la respuesta del servidor.");
-            return;
-        }
-
+        const result = await response.json();
         console.log("✅ Parsed API Response:", result);
 
-        // Handle API Response
-        if (response.ok && result.status === "success") {
+        if (result.status === "success") {
             alert(result.message || "Registro exitoso. Ahora puedes iniciar sesión.");
             window.location.href = "signin.html";
-        } else if (response.status === 400 && result.status === "error") { 
-            // Handle existing email case
-            alert(result.message || "Este email ya está registrado. Ve a 'Iniciar sesión' si ya tienes cuenta.");
         } else {
-            alert("Hubo un error: " + (result.message || "Ocurrió un problema inesperado."));
+            alert(result.message || "Hubo un problema al registrarte.");
         }
     } catch (error) {
         console.error("❌ Fetch error:", error);
