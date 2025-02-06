@@ -131,14 +131,14 @@
         console.log("API Response:", result); // Debugging
 
         if (response.ok && result.status === "success") {
-            alert("Registro exitoso. Ahora puedes iniciar sesión.");
+            alert("Registrado. Ahora puedes iniciar sesión.");
             window.location.href = "signin.html";
         } else {
-            alert(result.message || "Hubo un error en el registro. Inténtalo de nuevo.");
+            alert(result.message || "Hubo un problema de conexión. Probablemente el correo que estás usando ya está registrado. Si quieres iniciar sesión, dale al botón azul.");
         }
     } catch (error) {
         console.error("Fetch error:", error);
-        alert("Hubo un problema de conexión.");
+        alert("Hubo un problema de conexión. Probablemente el correo que estás usando ya está registrado. Si quieres iniciar sesión, dale al botón azul.");
     }
 });
 </script>
