@@ -127,18 +127,31 @@
             body: JSON.stringify(data)
         });
 
-        const result = await response.json();
-        console.log("API Response:", result); // Debugging
+        // 🛑 Ensure the response is actually JSON before parsing
+        const textResponse = await response.text();
+        console.log("Raw API Response:", textResponse);
 
-        if (response.ok && result.status === "success") {
-            alert("Registrado. Ahora puedes iniciar sesión.");
-            window.location.href = "signin.html";
-        } else {
-            alert(result.message || "Hubo un problema de conexión. Probablemente el correo que estás usando ya está registrado. Si quieres iniciar sesión, dale al botón azul.");
+        try {
+            const result = JSON.parse(textResponse);
+            console.log("Parsed API Response:", result);
+
+            if (response.ok && result.status === "success") {
+                alert("Registrado. Ahora puedes iniciar sesión.");
+                window.location.href = "signin.html";
+            } else if (response.status === 400 && result.message) {
+                // Handle existing email case
+                alert(result.message);
+            } else {
+                alert("Hubo un error: " + (result.message || "El email ya está registrado. Ve a iniciar sesion si quieres entrar."));
+            }
+        } catch (jsonError) {
+            console.error("JSON Parsing Error:", jsonError);
+            alert("Hubo un problema de conexión. La respuesta no es válida.");
         }
+
     } catch (error) {
         console.error("Fetch error:", error);
-        alert("Hubo un problema de conexión. Probablemente el correo que estás usando ya está registrado. Si quieres iniciar sesión, dale al botón azul.");
+        alert("Hubo un problema de conexión.");
     }
 });
 </script>
