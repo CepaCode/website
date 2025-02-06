@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Full-width banner */
-        /*.banner {
+        .banner {
             width: 100%;
-            height: 120px; /* Adjust as needed */
-          /*  background: url('homeheader.png') no-repeat center center;
+            height: 120px;
+            background: url('homeheader.png') no-repeat center center;
             background-size: cover;
         }
 
@@ -79,9 +79,10 @@
         <button id="signupButton" class="btn btn-success btn-block" type="submit">Registrarse</button>
     </form>
 
-    <!-- ✅ Move "Iniciar sesión" outside the form to avoid issues -->
+    <!-- Iniciar Sesión Button -->
     <a href="signin.html" class="btn btn-primary btn-block mt-3">Iniciar sesión</a>
 </div>
+
 <!-- Footer -->
 <footer class="footer-custom text-center">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
@@ -89,25 +90,27 @@
 
 <!-- Scripts -->
 <script>
-  ddocument.getElementById("signupForm").addEventListener("submit", async function(event) {
+  document.getElementById("signupForm").addEventListener("submit", async function(event) {
     event.preventDefault();
 
-    const fullname = document.getElementById("fullname").value;
-    const email = document.getElementById("email").value;
+    // 🔹 Get Form Values
+    const fullname = document.getElementById("fullname").value.trim();
+    const email = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
 
-    if (!fullname.trim() || !email.trim() || !password.trim()) {
+    // 🔹 Frontend Validations
+    if (!fullname || !email || !password || !confirmPassword) {
         alert("Por favor, completa todos los campos.");
         return;
     }
-
     if (password !== confirmPassword) {
         alert("Las contraseñas no coinciden. Inténtalo de nuevo.");
         return;
     }
 
-    const hashedPassword = btoa(password); // Encode password
+    // 🔹 Encode Password (Base64)
+    const hashedPassword = btoa(password); 
 
     const data = {
         ncs_fullname: fullname,
@@ -115,10 +118,11 @@
         ncs_password: hashedPassword
     };
 
-    console.log("Signup Payload:", JSON.stringify(data)); // Debugging
+    console.log("📡 Sending Signup Request:", JSON.stringify(data));
 
     try {
-        const response = await fetch("https://prod-163.westeurope.logic.azure.com:443/workflows/296b7198aac94a63a916d14860e7c75b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vQWfcinuPGvS4mD8puvcm-sDd-haB2pd8lSowzrxrwg", {
+        // 🔹 Make API Call
+        const response = await fetch("https://prod-220.westeurope.logic.azure.com:443/workflows/f0872aae74c64f57afbd6af7be9e757d/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=YlmuDqRoJIF_CBfbGsgSTy3K3knYPtgzcXAS5ZYUZLc", {
             method: "POST",
             headers: { 
                 "Content-Type": "application/json",
@@ -127,24 +131,40 @@
             body: JSON.stringify(data)
         });
 
-        const textResponse = await response.text(); // Read raw response
-        console.log("Raw API Response:", textResponse);
+        console.log("📡 Response Status:", response.status);
 
-        if (!textResponse) {
-            throw new Error("Empty response from server");
+        // 🔹 Get Response Text & Validate
+        const textResponse = await response.text();
+        console.log("📡 Raw API Response:", textResponse);
+
+        if (!textResponse.trim()) {
+            alert("Error: No response from server.");
+            return;
         }
 
-        const result = JSON.parse(textResponse);
-        console.log("Parsed API Response:", result);
+        // 🔹 Try Parsing JSON Response
+        let result;
+        try {
+            result = JSON.parse(textResponse);
+        } catch (error) {
+            console.error("❌ JSON Parsing Error:", error);
+            alert("Hubo un problema con la respuesta del servidor.");
+            return;
+        }
 
+        console.log("✅ Parsed API Response:", result);
+
+        // 🔹 Handle API Response
         if (response.ok && result.status === "success") {
-            alert(result.message);
+            alert(result.message || "Registro exitoso. Ahora puedes iniciar sesión.");
             window.location.href = "signin.html";
+        } else if (result.status === "error") { 
+            alert(result.message || "Este email ya está registrado. Ve a 'Iniciar sesión' si ya tienes cuenta.");
         } else {
-            alert("Hubo un error: " + (result.message || "Ocurrió un problema."));
+            alert("Hubo un error: " + (result.message || "Ocurrió un problema inesperado."));
         }
     } catch (error) {
-        console.error("Fetch error:", error);
+        console.error("❌ Fetch error:", error);
         alert("Hubo un problema de conexión.");
     }
 });
