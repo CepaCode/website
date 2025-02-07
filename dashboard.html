@@ -64,24 +64,23 @@
 
     <!-- Access Sections with Cards -->
     <div class="row mt-4">
-        <!-- Prácticas -->
-        <div class="col-md-6 offset-md-3" id="practicesSection">
-            <div class="card shadow-lg p-4 mb-4">
-                <h4 class="text-center">Prácticas de Power Apps y Power Automate</h4>
-                <p class="text-center">Accede a ejercicios prácticos para mejorar tus habilidades en Power Platform.</p>
-                <button id="practicesButton" class="btn btn-primary btn-block">Acceder a Prácticas</button>
-            </div>
-        </div>
+<!-- Prácticas Block (Mensual & Up) -->
+<div id="practicesBlock" class="subscription-block">
+    <h3>Prácticas de Power Platform</h3>
+    <p>Accede a más de 50 horas de prácticas de Power Apps y Power Automate.</p>
+</div>
 
-        <!-- Exámenes -->
-        <div class="col-md-6 offset-md-3" id="examsSection">
-            <div class="card shadow-lg p-4">
-                <h4 class="text-center">Preparación de exámenes para certificaciones</h4>
-                <p class="text-center">Prepara tus exámenes de certificación con materiales exclusivos.</p>
-                <button id="examsButton" class="btn btn-primary btn-block">Acceder a Exámenes</button>
-            </div>
-        </div>
-    </div>
+<!-- Exámenes Block (Trimestral & Anual) -->
+<div id="examsBlock" class="subscription-block" style="display: none;">
+    <h3>Preparación para Certificaciones</h3>
+    <p>Incluye materiales y exámenes para PL-900, PL-200 y PL-600.</p>
+</div>
+
+<!-- Reunión CepaCode (Anual Only) -->
+<div id="meetingBlock" class="subscription-block" style="display: none;">
+    <h3>Reunión CepaCode</h3>
+    <p>Accede a reuniones con expertos en Power Platform.</p>
+    <a href="https://teams.microsoft.com/meeting-link" class="btn btn-primary">Unirme a la reunión</a>
 </div>
 
 <!-- Footer -->
@@ -91,48 +90,60 @@
 
 <!-- Scripts -->
 <script>
-  // Retrieve logged-in user data
-  const userData = localStorage.getItem("user");
+    document.addEventListener("DOMContentLoaded", async function () {
+        const userData = localStorage.getItem("user");
 
-  if (!userData) {
-      alert("¡No has iniciado sesión!");
-      window.location.href = "signin.html"; // Redirect to login page
-  } else {
-      const user = JSON.parse(userData);
-      document.getElementById("userFullName").innerText = user.fullname || "Usuario";
+        if (!userData) {
+            alert("¡No has iniciado sesión!");
+            window.location.href = "signin.html";
+            return;
+        }
 
-      // Handle subscription-based visibility
-      const practicesSection = document.getElementById("practicesSection");
-      const examsSection = document.getElementById("examsSection");
-      const practicesButton = document.getElementById("practicesButton");
-      const examsButton = document.getElementById("examsButton");
+        const user = JSON.parse(userData);
+        document.getElementById("userFullName").innerText = user.fullname || "Usuario";
 
-      if (user.subscription === "pro") {
-          // Show both sections as usual
-          practicesButton.onclick = () => window.location.href = "cepacodepro.html";
-          examsButton.onclick = () => window.location.href = "cepacodepro.html";
-      } else if (user.subscription === "builder") {
-          // Show Prácticas, but Exams should be "Adquirir"
-          examsButton.innerText = "Adquirir";
-          examsButton.onclick = () => window.location.href = "membership.html";
-          examsButton.classList.add("btn-adquirir"); // Apply inverted color styling
-      } else if (user.subscription === "student") {
-          // Show Exámenes, but Prácticas should be "Adquirir"
-          practicesButton.innerText = "Adquirir";
-          practicesButton.onclick = () => window.location.href = "membership.html";
-          practicesButton.classList.add("btn-adquirir"); // Apply inverted color styling
-      } else {
-          // No valid subscription, redirect to membership page
-          window.location.href = "membership.html";
-      }
-  }
+        try {
+            // Fetch user subscription from API
+            const response = await fetch("https://your-api-endpoint/membership", {
+                method: "GET",
+                headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+            });
 
-  // Logout function
-  function logout() {
-      localStorage.removeItem("user"); 
-      window.location.href = "signin.html"; 
-  }
+            if (!response.ok) throw new Error("No autorizado");
+
+            const userData = await response.json();
+            const subscription = userData.ncs_subscription; // Mensual, Trimestral o Anual
+
+            document.getElementById("subscriptionTitle").textContent = `Tu suscripción: CepaCode Pro ${subscription}`;
+
+            // Show content based on subscription type
+            if (subscription === "Mensual") {
+                document.getElementById("practicesBlock").style.display = "block";
+            } else if (subscription === "Trimestral") {
+                document.getElementById("practicesBlock").style.display = "block";
+                document.getElementById("examsBlock").style.display = "block";
+            } else if (subscription === "Anual") {
+                document.getElementById("practicesBlock").style.display = "block";
+                document.getElementById("examsBlock").style.display = "block";
+                document.getElementById("meetingBlock").style.display = "block";
+            } else {
+                // No valid subscription, redirect to membership page
+                window.location.href = "membership.html";
+            }
+        } catch (error) {
+            console.error("Error loading membership data:", error);
+            alert("Hubo un error al cargar tu suscripción.");
+            window.location.href = "membership.html";
+        }
+    });
+
+    // Logout function
+    function logout() {
+        localStorage.removeItem("user"); 
+        window.location.href = "signin.html"; 
+    }
 </script>
+
 
 </body>
 </html>
