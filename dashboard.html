@@ -90,7 +90,8 @@
 
 <!-- Scripts -->
 <script>
-    document.addEventListener("DOMContentLoaded", async function () {
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get user data from localStorage
         const userData = localStorage.getItem("user");
 
         if (!userData) {
@@ -99,37 +100,32 @@
             return;
         }
 
+        // Parse user data
         const user = JSON.parse(userData);
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
 
-        try {
-            // Fetch user subscription from API
-const subscription = user.subscription.toLowerCase(); // Already stored in localStorage
+        // Validate subscription
+        const subscription = user.subscription ? user.subscription.toLowerCase() : null;
+        const validSubscriptions = ["mensual", "trimestral", "anual"];
 
-document.getElementById("subscriptionTitle").textContent = `Tu suscripción: CepaCode Pro ${subscription}`;
-
-if (!subscription || (subscription !== "mensual" && subscription !== "trimestral" && subscription !== "anual")) {
-    console.error("Invalid or missing subscription:", subscription);
-    alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
-    window.location.href = "membership.html";
-    return;
-}
-
-// Show content based on subscription type
-if (subscription === "mensual") {
-    document.getElementById("practicesBlock").style.display = "block";
-} else if (subscription === "trimestral") {
-    document.getElementById("practicesBlock").style.display = "block";
-    document.getElementById("examsBlock").style.display = "block";
-} else if (subscription === "anual") {
-    document.getElementById("practicesBlock").style.display = "block";
-    document.getElementById("examsBlock").style.display = "block";
-    document.getElementById("meetingBlock").style.display = "block";
-}
-        } catch (error) {
-            console.error("Error loading membership data:", error);
-            alert("Hubo un error al cargar tu suscripción.");
+        if (!validSubscriptions.includes(subscription)) {
+            console.error("Invalid or missing subscription:", subscription);
+            alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
             window.location.href = "membership.html";
+            return;
+        }
+
+        // Set subscription title
+        document.getElementById("subscriptionTitle").textContent = `Tu suscripción: CepaCode Pro ${subscription}`;
+
+        // Show content based on subscription type
+        document.getElementById("practicesBlock").style.display = "block";
+
+        if (subscription === "trimestral" || subscription === "anual") {
+            document.getElementById("examsBlock").style.display = "block";
+        }
+        if (subscription === "anual") {
+            document.getElementById("meetingBlock").style.display = "block";
         }
     });
 
