@@ -18,6 +18,10 @@
         }
         .subscription-block h3 {
             margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
         .block-subtitle {
             font-size: 14px;
@@ -29,6 +33,10 @@
             width: 100%;
             padding: 12px;
             font-size: 18px;
+        }
+        .icon-img {
+            width: 20px;
+            height: 20px;
         }
     </style>
 </head>
@@ -90,12 +98,21 @@
         const featuresContainer = document.getElementById("featuresContainer");
 
         // Function to create blocks dynamically
-        function createFeatureBlock(title, subtitle, id, colorClass, onClickHandler) {
+        function createFeatureBlock(title, subtitle, id, colorClass, onClickHandler, iconURL = null) {
             const block = document.createElement("div");
             block.classList.add("subscription-block");
 
             const heading = document.createElement("h3");
-            heading.textContent = title;
+
+            if (iconURL) {
+                const icon = document.createElement("img");
+                icon.src = iconURL;
+                icon.classList.add("icon-img");
+                heading.appendChild(icon);
+            }
+
+            const titleText = document.createTextNode(title);
+            heading.appendChild(titleText);
 
             const subtext = document.createElement("p");
             subtext.classList.add("block-subtitle");
@@ -116,7 +133,7 @@
         // **Feature Blocks Based on Subscription Type**
         createFeatureBlock(
             "Prácticas de Power Platform",
-            "Accede a más de 50 horas de trabajo y prácticas para alcanzar más rápido que nadie un gran nivel en Power Apps y Power Automate.",
+            "Aprende conmigo durante más de 50 horas para alcanzar más rápido que nadie un gran nivel en Power Platform.",
             "practicesBlock",
             "btn-blue",
             () => alert("Redirigiendo a prácticas...")
@@ -134,13 +151,13 @@
             "Acceder al Club de los Viernes",
             `Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform. 
             Hablaremos de cómo obtener mejores carreras profesionales, mejores salarios y de cómo adquirir esas habilidades no técnicas que te harán único en el mercado.<br><br>
-            <b>🕒 Horarios los viernes:</b><br>
-            🇪🇸 España: 16:00<br>
+            <b>🕒 Horarios los viernes:</b><br>    
             🇲🇽 México DF: 09:00<br>
             🇨🇴 Bogotá: 10:00<br>
             🇵🇪 Lima: 10:00<br>
             🇦🇷 Buenos Aires: 12:00<br>
-            🇨🇱 Santiago: 12:00`,
+            🇨🇱 Santiago: 12:00<br>
+            🇪🇸 Madrid: 16:00`,
             "clubBlock",
             subscription === "mensual" ? "btn-orange" : "btn-blue",
             () => {
@@ -149,11 +166,12 @@
                 } else {
                     window.open("https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZTYxNzc4MjgtMmYzYS00ZjViLTlkYjMtMmIyNDFiNGU3OWVl%40thread.v2/0?context=%7b%22Tid%22%3a%22d6f3c3a3-bf18-42da-aab1-74d2e659e789%22%2c%22Oid%22%3a%2214bd5277-2ed9-40f3-b75a-eb08ae5d2b5c%22%7da", "_blank");
                 }
-            }
+            },
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png"
         );
 
         createFeatureBlock(
-            "Consulta a Nacho Cepa 24 horas",
+            "Consultas directas 24 horas",
             "Envíame un mensaje en WhatsApp y te contesto en menos de 24 horas para ayudarte con tu problema Power Platform 💬",
             "phoneBlock",
             subscription === "mensual" || subscription === "trimestral" ? "btn-orange" : "btn-blue",
@@ -164,7 +182,8 @@
                     const phoneNumber = "623958609";
                     window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "_blank");
                 }
-            }
+            },
+            "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
         );
     });
 
