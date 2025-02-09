@@ -8,9 +8,27 @@
     <style>
         .btn-blue { background-color: #007bff; color: white; }
         .btn-orange { background-color: #f5ca31; color: white; }
+        .subscription-block {
+            background-color: #f8f9fa; /* Light background */
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .subscription-block h3 {
+            margin-bottom: 15px;
+        }
+        .btn-block-custom {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
@@ -27,24 +45,15 @@
         </div>
     </div>
 </nav>
+
 <!-- Membership Section -->
-<div class="container mt-5 text-center">
-    <h2 id="subscriptionTitle">CepaCode Pro</h2>
-    <p>¡Bienvenid@ a tu zona exclusiva, <span id="userFullName"></span>!</p>
+<div class="container mt-5">
+    <h2 id="subscriptionTitle" class="text-center">CepaCode Pro</h2>
+    <p class="text-center">¡Bienvenid@ a tu zona exclusiva, <span id="userFullName"></span>!</p>
 
-    <!-- Button Section -->
-    <div class="d-flex justify-content-center flex-wrap">
-<!-- Prácticas de Power Platform -->
-<button id="practicesBlock" style="display: none;">Prácticas de Power Platform</button>
-
-<!-- Prácticas de examen -->
-<button id="examsBlock" style="display: none;">Prácticas de examen</button>
-
-<!-- Acceder al Club de los Viernes -->
-<button id="clubBlock" style="display: none;">Acceder al Club de los Viernes</button>
-
-<!-- Número de teléfono de Nacho Cepa -->
-<button id="phoneBlock" style="display: none;">Número de teléfono de Nacho Cepa</button>        </button>
+    <!-- Subscription Features -->
+    <div id="featuresContainer">
+        <!-- Blocks will be inserted here dynamically -->
     </div>
 </div>
 
@@ -73,44 +82,58 @@
 
         document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
 
-        // Show all buttons
-        document.getElementById("practicesBlock").style.display = "block";
-        document.getElementById("examsBlock").style.display = "block";
-        document.getElementById("clubBlock").style.display = "block";
-        document.getElementById("phoneBlock").style.display = "block";
+        const featuresContainer = document.getElementById("featuresContainer");
 
-        // Set button colors based on subscription
-        if (subscription === "mensual") {
-            document.getElementById("practicesBlock").classList.add("btn-blue");
-            document.getElementById("examsBlock").classList.add("btn-blue");
-            document.getElementById("clubBlock").classList.add("btn-orange"); // 🔥 Fix: Now yellow for mensual
-            document.getElementById("phoneBlock").classList.add("btn-orange");
-        } else if (subscription === "trimestral") {
-            document.getElementById("practicesBlock").classList.add("btn-blue");
-            document.getElementById("examsBlock").classList.add("btn-blue");
-            document.getElementById("clubBlock").classList.add("btn-blue");
-            document.getElementById("phoneBlock").classList.add("btn-orange");
-        } else if (subscription === "anual") {
-            document.getElementById("practicesBlock").classList.add("btn-blue");
-            document.getElementById("examsBlock").classList.add("btn-blue");
-            document.getElementById("clubBlock").classList.add("btn-blue");
-            document.getElementById("phoneBlock").classList.add("btn-blue"); // 🔹 Anual gets ALL blue
+        // Function to create blocks dynamically
+        function createFeatureBlock(title, id, colorClass, onClickHandler) {
+            const block = document.createElement("div");
+            block.classList.add("subscription-block");
+
+            const heading = document.createElement("h3");
+            heading.textContent = title;
+
+            const button = document.createElement("button");
+            button.id = id;
+            button.classList.add("btn", "btn-block-custom", colorClass);
+            button.textContent = title;
+            button.onclick = onClickHandler;
+
+            block.appendChild(heading);
+            block.appendChild(button);
+            featuresContainer.appendChild(block);
         }
 
-        // 🔥 Click functionality for yellow buttons (redirect to membership page)
-        document.getElementById("clubBlock").addEventListener("click", function () {
-            if (subscription === "mensual") {
-                window.location.href = "membership.html"; // Redirect mensual users
-            }
-        });
+        // **Feature Blocks Based on Subscription Type**
+        createFeatureBlock("Prácticas de Power Platform", "practicesBlock", "btn-blue", () => alert("Redirigiendo a prácticas..."));
+        
+        createFeatureBlock("Prácticas de examen", "examsBlock", "btn-blue", () => alert("Redirigiendo a exámenes..."));
 
-        document.getElementById("phoneBlock").addEventListener("click", function () {
-            if (subscription === "mensual" || subscription === "trimestral") {
-                window.location.href = "membership.html"; // Redirect for mensual & trimestral users
-            } else {
-                const phoneNumber = "+34XXXXXXXXX"; // Replace with your real number
-window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "623958609");            }
-        });
+        createFeatureBlock(
+            "Acceder al Club de los Viernes",
+            "clubBlock",
+            subscription === "mensual" ? "btn-orange" : "btn-blue",
+            () => {
+                if (subscription === "mensual") {
+                    window.location.href = "membership.html";
+                } else {
+                    alert("Accediendo al Club de los Viernes...");
+                }
+            }
+        );
+
+        createFeatureBlock(
+            "Número de teléfono de Nacho Cepa",
+            "phoneBlock",
+            subscription === "mensual" || subscription === "trimestral" ? "btn-orange" : "btn-blue",
+            () => {
+                if (subscription === "mensual" || subscription === "trimestral") {
+                    window.location.href = "membership.html";
+                } else {
+                    const phoneNumber = "+34623958609"; // Replace with your real number
+                    window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "623958609");
+                }
+            }
+        );
     });
 
     function logout() {
@@ -118,5 +141,6 @@ window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "623958609");    
         window.location.href = "signin.html";
     }
 </script>
+
 </body>
 </html>
