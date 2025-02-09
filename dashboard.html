@@ -49,60 +49,68 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    // Get user data from localStorage
-    const userData = localStorage.getItem("user");
-
-    if (!userData) {
-        alert("¡No has iniciado sesión!");
-        window.location.href = "signin.html";
-        return;
-    }
-
-    // Parse user data
-    const user = JSON.parse(userData);
-    document.getElementById("userFullName").innerText = user.fullname || "Usuario";
-
-    // Validate subscription
-    const subscription = user.subscription ? user.subscription.toLowerCase() : null;
-    const validSubscriptions = ["mensual", "trimestral", "anual"];
-
-    if (!validSubscriptions.includes(subscription)) {
-        console.error("Invalid or missing subscription:", subscription);
-        alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
-        window.location.href = "membership.html";
-        return;
-    }
-
-    // Set subscription title
-    document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
-
-    // Debugging logs
-    console.log("User Subscription:", subscription);
-
-    if (subscription === "mensual") {
-        console.log("Mensual Plan Active - Showing Only Prácticas");
-        document.getElementById("practicesBlock").style.display = "block";
-    } else if (subscription === "trimestral") {
-        console.log("Trimestral Plan Active - Showing Prácticas + Exámenes + Club de los Viernes");
-        document.getElementById("practicesBlock").style.display = "block";
-        document.getElementById("examsBlock").style.display = "block";
-        document.getElementById("clubBlock").style.display = "block"; // ✅ Now showing for trimestral
-    } else if (subscription === "anual") {
-        console.log("Anual Plan Active - Showing All Options");
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get user data from localStorage
+        const userData = localStorage.getItem("user");
+    
+        if (!userData) {
+            alert("¡No has iniciado sesión!");
+            window.location.href = "signin.html";
+            return;
+        }
+    
+        // Parse user data
+        const user = JSON.parse(userData);
+        document.getElementById("userFullName").innerText = user.fullname || "Usuario";
+    
+        // Validate subscription
+        const subscription = user.subscription ? user.subscription.toLowerCase() : null;
+        const validSubscriptions = ["mensual", "trimestral", "anual"];
+    
+        if (!validSubscriptions.includes(subscription)) {
+            console.error("Invalid or missing subscription:", subscription);
+            alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
+            window.location.href = "membership.html";
+            return;
+        }
+    
+        // Set subscription title
+        document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
+    
+        // Debugging logs
+        console.log("User Subscription:", subscription);
+    
+        // Ensure all buttons are shown
         document.getElementById("practicesBlock").style.display = "block";
         document.getElementById("examsBlock").style.display = "block";
         document.getElementById("clubBlock").style.display = "block";
-        document.getElementById("phoneBlock").style.display = "block"; // ✅ Now showing for anual
+        document.getElementById("phoneBlock").style.display = "block";
+    
+        // Set button colors based on subscription
+        if (subscription === "mensual") {
+            document.getElementById("practicesBlock").classList.add("btn-blue");
+            document.getElementById("examsBlock").classList.add("btn-blue");
+            document.getElementById("clubBlock").classList.add("btn-blue");
+            document.getElementById("phoneBlock").classList.add("btn-orange");
+        } else if (subscription === "trimestral") {
+            document.getElementById("practicesBlock").classList.add("btn-blue");
+            document.getElementById("examsBlock").classList.add("btn-blue");
+            document.getElementById("clubBlock").classList.add("btn-blue");
+            document.getElementById("phoneBlock").classList.add("btn-orange");
+        } else if (subscription === "anual") {
+            document.getElementById("practicesBlock").classList.add("btn-blue");
+            document.getElementById("examsBlock").classList.add("btn-blue");
+            document.getElementById("clubBlock").classList.add("btn-blue");
+            document.getElementById("phoneBlock").classList.add("btn-blue"); // 🔹 Anual gets ALL blue
+        }
+    });
+    
+    // Logout function
+    function logout() {
+        localStorage.removeItem("user");
+        window.location.href = "signin.html";
     }
-});
-
-// Logout function
-function logout() {
-    localStorage.removeItem("user");
-    window.location.href = "signin.html";
-}
-</script>
+    </script>
 
 </body>
 </html>
