@@ -37,6 +37,7 @@
         .icon-img {
             width: 35px;
             height: 35px;
+            margin-left: 10px; /* Ensures spacing between text and icon */
         }
     </style>
 </head>
@@ -104,15 +105,15 @@
 
             const heading = document.createElement("h3");
 
+            const titleText = document.createTextNode(title);
+            heading.appendChild(titleText);
+
             if (iconURL) {
                 const icon = document.createElement("img");
                 icon.src = iconURL;
                 icon.classList.add("icon-img");
                 heading.appendChild(icon);
             }
-
-            const titleText = document.createTextNode(title);
-            heading.appendChild(titleText);
 
             const subtext = document.createElement("p");
             subtext.classList.add("block-subtitle");
