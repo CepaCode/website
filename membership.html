@@ -6,28 +6,33 @@
     <title>Membresía - CepaCode</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .btn-gray { background-color: #e0e0e0; color: black; }
+        .btn-gray { background-color: #e0e0e0; color: black; border: 1px solid #000; }
         .subscription-block {
             background-color: #f8f9fa;
             padding: 20px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             border-radius: 10px;
-            text-align: center;
+            text-align: left;
             box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
         }
         .subscription-block h3 {
-            margin-bottom: 15px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
         }
         .block-subtitle {
+            font-size: 16px;
+            color: #333;
+            font-weight: bold;
+        }
+        .plan-description {
             font-size: 14px;
             color: #555;
-            margin-bottom: 15px;
+            margin-top: 10px;
         }
-        .btn-block-custom {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            font-size: 18px;
+        .btn-container {
+            text-align: center;
+            margin-top: 15px;
         }
     </style>
 </head>
@@ -53,34 +58,64 @@
 <!-- Membership Plans -->
 <div class="container mt-5">
     <h2 class="text-center">Elige tu suscripción CepaCode Pro</h2>
-    <p class="text-center">Accede a contenido exclusivo y mejora tus habilidades en Power Platform.</p>
+    <p class="text-center">Accede a contenido exclusivo, mejora tus habilidades en Power Platform y contacta conmigo cuando tengas dudas.</p>
 
-    <div class="row">
-        <!-- Mensual -->
-        <div class="col-md-4">
-            <div class="subscription-block">
-                <h3>CepaCode Pro Mensual</h3>
-                <p class="block-subtitle">9€/mes - Accede a más de 50 horas de prácticas.</p>
-                <button class="btn btn-block-custom btn-gray" onclick="subscribe('mensual')">Suscribirme</button>
-            </div>
+    <!-- Mensual -->
+    <div class="subscription-block">
+        <h3>CepaCode Pro Mensual 9€/mes</h3>
+        <p class="block-subtitle">Incluye:</p>
+        <ul class="plan-description">
+            <li>Más de 50 horas de prácticas de Power Apps y Power Automate.</li>
+            <li>Todas las preparaciones de exámenes para certificarte: PL900, PL200 y PL600.</li>
+        </ul>
+        <div class="btn-container">
+            <button class="btn btn-gray">Suscribirme</button>
+            <button class="btn btn-gray">PayPal</button>
         </div>
+    </div>
 
-        <!-- Trimestral -->
-        <div class="col-md-4">
-            <div class="subscription-block">
-                <h3>CepaCode Pro Trimestral</h3>
-                <p class="block-subtitle">24,30€/trimestre - Incluye prácticas y preparación de exámenes.</p>
-                <button class="btn btn-block-custom btn-gray" onclick="subscribe('trimestral')">Suscribirme</button>
-            </div>
+    <!-- Trimestral -->
+    <div class="subscription-block">
+        <h3>CepaCode Pro Trimestral 24,30€/Trimestre (Un mes gratis, ahorra un 10%)</h3>
+        <p class="block-subtitle">Incluye:</p>
+        <ul class="plan-description">
+            <li>Todo lo incluido en <b>CepaCode Pro Mensual</b>.</li>
+            <li>Reunión grupal donde:
+                <ul>
+                    <li>Conéctate con otros compañeros y expertos en Power Platform.</li>
+                    <li>Trucos y consejos para obtener mejores oportunidades laborales.</li>
+                    <li>Aprende habilidades no técnicas esenciales para el mercado.</li>
+                </ul>
+            </li>
+        </ul>
+        <p class="block-subtitle">Horarios de la reunión (Club de los Viernes):</p>
+        <ul class="plan-description">
+            <li>España: 16:00 🇪🇸</li>
+            <li>México DF: 09:00 🇲🇽</li>
+            <li>Bogotá: 10:00 🇨🇴</li>
+            <li>Lima: 10:00 🇵🇪</li>
+            <li>Buenos Aires: 12:00 🇦🇷</li>
+            <li>Santiago: 12:00 🇨🇱</li>
+        </ul>
+        <p class="plan-description"><b>Si no puedes asistir, accede a la grabación de la sesión.</b></p>
+        <div class="btn-container">
+            <button class="btn btn-gray">Suscribirme</button>
+            <button class="btn btn-gray">PayPal</button>
         </div>
+    </div>
 
-        <!-- Anual -->
-        <div class="col-md-4">
-            <div class="subscription-block">
-                <h3>CepaCode Pro Anual</h3>
-                <p class="block-subtitle">75,6€/año - Incluye prácticas, exámenes y acceso a consultas directas.</p>
-                <button class="btn btn-block-custom btn-gray" onclick="subscribe('anual')">Suscribirme</button>
-            </div>
+    <!-- Anual -->
+    <div class="subscription-block">
+        <h3>CepaCode Pro Anual 75,6€/Año (3 meses gratis, ahorra un 25%)</h3>
+        <p class="block-subtitle">Incluye:</p>
+        <ul class="plan-description">
+            <li>Todo lo incluido en <b>CepaCode Pro Trimestral</b>.</li>
+            <li>Acceso a consulta directa conmigo: responde en 24 horas a tus dudas sobre Power Platform.</li>
+            <li>Único pago anual con gran descuento.</li>
+        </ul>
+        <div class="btn-container">
+            <button class="btn btn-gray">Suscribirme</button>
+            <button class="btn btn-gray">PayPal</button>
         </div>
     </div>
 </div>
@@ -89,13 +124,6 @@
 <footer class="footer-custom text-center mt-5 p-4">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
 </footer>
-
-<script>
-    function subscribe(plan) {
-        alert(`Redirigiendo al pago de ${plan}`);
-        // Here we will later integrate Stripe or PayPal
-    }
-</script>
 
 </body>
 </html>
