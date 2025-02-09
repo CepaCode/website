@@ -39,6 +39,13 @@
             height: 35px;
             margin-left: 10px; /* Ensures spacing between text and icon */
         }
+        .membership-subtitle {
+    font-size: 0.8em; /* Half the title size */
+    text-align: center;
+    color: #333; /* Dark gray for readability */
+    font-weight: bold;
+    margin-bottom: 10px;
+}
     </style>
 </head>
 <body>
@@ -133,60 +140,49 @@
 
         // **Feature Blocks Based on Subscription Type**
         createFeatureBlock(
-            "Prácticas de Power Platform",
-            "Aprende conmigo durante más de 50 horas para alcanzar más rápido que nadie un gran nivel en Power Platform.",
-            "practicesBlock",
-            "btn-blue",
-            () => alert("Redirigiendo a prácticas...")
-        );
+    "Acceder al Club de los Viernes",
+    `Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform. 
+    Hablaremos de cómo obtener mejores carreras profesionales, mejores salarios y de cómo adquirir esas habilidades no técnicas que te harán único en el mercado.<br><br>
+    <b>🕒 Horarios los viernes:</b><br>    
+    🇲🇽 México DF: 09:00<br>
+    🇨🇴 Bogotá: 10:00<br>
+    🇵🇪 Lima: 10:00<br>
+    🇦🇷 Buenos Aires: 12:00<br>
+    🇨🇱 Santiago: 12:00<br>
+    🇪🇸 Madrid: 16:00`,
+    "clubBlock",
+    subscription === "mensual" ? "btn-orange" : "btn-blue",
+    () => {
+        if (subscription === "mensual") {
+            window.location.href = "membership.html";
+        } else {
+            window.open("https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZTYxNzc4MjgtMmYzYS00ZjViLTlkYjMtMmIyNDFiNGU3OWVl%40thread.v2/0?context=%7b%22Tid%22%3a%22d6f3c3a3-bf18-42da-aab1-74d2e659e789%22%2c%22Oid%22%3a%2214bd5277-2ed9-40f3-b75a-eb08ae5d2b5c%22%7da", "_blank");
+        }
+    },
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png",
+    subscription === "mensual"
+        ? "Navegar para gestionar mi suscripción y obtener acceso al Club de los Viernes"
+        : "Acceder al Club de los Viernes"
+);
 
-        createFeatureBlock(
-            "Prácticas de examen",
-            "Certifícate y demuestra al mundo (y sobre todo, en LinkedIn) que eres un profesional de Power Platform.",
-            "examsBlock",
-            "btn-blue",
-            () => alert("Redirigiendo a exámenes...")
-        );
-
-        createFeatureBlock(
-            "Acceder al Club de los Viernes",
-            `Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform. 
-            Hablaremos de cómo obtener mejores carreras profesionales, mejores salarios y de cómo adquirir esas habilidades no técnicas que te harán único en el mercado.<br><br>
-            <b>🕒 Horarios los viernes:</b><br>    
-            🇲🇽 México DF: 09:00<br>
-            🇨🇴 Bogotá: 10:00<br>
-            🇵🇪 Lima: 10:00<br>
-            🇦🇷 Buenos Aires: 12:00<br>
-            🇨🇱 Santiago: 12:00<br>
-            🇪🇸 Madrid: 16:00`,
-            "clubBlock",
-            subscription === "mensual" ? "btn-orange" : "btn-blue",
-            () => {
-                if (subscription === "mensual") {
-                    window.location.href = "membership.html";
-                } else {
-                    window.open("https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZTYxNzc4MjgtMmYzYS00ZjViLTlkYjMtMmIyNDFiNGU3OWVl%40thread.v2/0?context=%7b%22Tid%22%3a%22d6f3c3a3-bf18-42da-aab1-74d2e659e789%22%2c%22Oid%22%3a%2214bd5277-2ed9-40f3-b75a-eb08ae5d2b5c%22%7da", "_blank");
-                }
-            },
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/Microsoft_Office_Teams_%282018%E2%80%93present%29.svg/1200px-Microsoft_Office_Teams_%282018%E2%80%93present%29.svg.png"
-        );
-
-        createFeatureBlock(
-            "Consultas directas 24 horas",
-            "Envíame un mensaje en WhatsApp y te contesto en menos de 24 horas para ayudarte con tu problema Power Platform 💬",
-            "phoneBlock",
-            subscription === "mensual" || subscription === "trimestral" ? "btn-orange" : "btn-blue",
-            () => {
-                if (subscription === "mensual" || subscription === "trimestral") {
-                    window.location.href = "membership.html";
-                } else {
-                    const phoneNumber = "623958609";
-                    window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "_blank");
-                }
-            },
-            "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png"
-        );
-    });
+createFeatureBlock(
+    "Consultas directas",
+    "Envíame un mensaje en WhatsApp y te contesto en menos de 24 horas para ayudarte con tu problema Power Platform 💬",
+    "phoneBlock",
+    subscription === "mensual" || subscription === "trimestral" ? "btn-orange" : "btn-blue",
+    () => {
+        if (subscription === "mensual" || subscription === "trimestral") {
+            window.location.href = "membership.html";
+        } else {
+            const phoneNumber = "623958609";
+            window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "_blank");
+        }
+    },
+    "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png",
+    subscription === "mensual" || subscription === "trimestral"
+        ? "Navegar para gestionar mi suscripción y obtener acceso a Consultas directas 24 horas"
+        : "Consultas directas 24 horas"
+);
 
     function logout() {
         localStorage.removeItem("user");
