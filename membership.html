@@ -34,6 +34,27 @@
             text-align: center;
             margin-top: 15px;
         }
+        /* Background colors for different subscription tiers */
+.mensual {
+    background-color: #dce7ff; /* Soft blue */
+}
+
+.trimestral {
+    background-color: #4a90e2; /* Standard blue */
+    color: white;
+}
+
+.anual {
+    background-color: #2660a4; /* Stronger blue */
+    color: white;
+}
+
+/* Adjust button styling inside the blue blocks */
+.trimestral .btn-gray, .anual .btn-gray {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+}
     </style>
 </head>
 <body>
@@ -61,65 +82,53 @@
     <p class="text-center">Accede a contenido exclusivo, mejora tus habilidades en Power Platform y contacta conmigo cuando tengas dudas.</p>
 
     <!-- Mensual -->
-    <div class="subscription-block">
-        <h3>CepaCode Pro Mensual 9€/mes</h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Más de 50 horas de prácticas de Power Apps y Power Automate.</li>
-            <li>Todas las preparaciones de exámenes para certificarte: PL900, PL200 y PL600.</li>
-        </ul>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
-        </div>
-    </div>
-
-    <!-- Trimestral -->
-    <div class="subscription-block">
-        <h3>CepaCode Pro Trimestral 24,30€/Trimestre (Un mes gratis, ahorra un 10%)</h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Todo lo incluido en <b>CepaCode Pro Mensual</b>.</li>
-            <li>Reunión grupal donde:
-                <ul>
-                    <li>Conéctate con otros compañeros y expertos en Power Platform.</li>
-                    <li>Trucos y consejos para obtener mejores oportunidades laborales.</li>
-                    <li>Aprende habilidades no técnicas esenciales para el mercado.</li>
-                </ul>
-            </li>
-        </ul>
-        <p class="block-subtitle">Horarios de la reunión (Club de los Viernes):</p>
-        <ul class="plan-description">
-            <li>España: 16:00 🇪🇸</li>
-            <li>México DF: 09:00 🇲🇽</li>
-            <li>Bogotá: 10:00 🇨🇴</li>
-            <li>Lima: 10:00 🇵🇪</li>
-            <li>Buenos Aires: 12:00 🇦🇷</li>
-            <li>Santiago: 12:00 🇨🇱</li>
-        </ul>
-        <p class="plan-description"><b>Si no puedes asistir, accede a la grabación de la sesión.</b></p>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
-        </div>
-    </div>
-
-    <!-- Anual -->
-    <div class="subscription-block">
-        <h3>CepaCode Pro Anual 75,6€/Año (3 meses gratis, ahorra un 25%)</h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Todo lo incluido en <b>CepaCode Pro Trimestral</b>.</li>
-            <li>Acceso a consulta directa conmigo: responde en 24 horas a tus dudas sobre Power Platform.</li>
-            <li>Único pago anual con gran descuento.</li>
-        </ul>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
-        </div>
+<div class="subscription-block mensual">
+    <h3>CepaCode Pro Mensual 9€/mes</h3>
+    <p class="block-subtitle">Incluye:</p>
+    <ul class="plan-description">
+        <li>Más de 50 horas de prácticas de Power Apps y Power Automate.</li>
+        <li>Todas las preparaciones de exámenes para certificarte: PL900, PL200 y PL600.</li>
+    </ul>
+    <div class="btn-container">
+        <button class="btn btn-gray">Suscribirme</button>
+        <button class="btn btn-gray">PayPal</button>
     </div>
 </div>
 
+<!-- Trimestral -->
+<div class="subscription-block trimestral">
+    <h3>CepaCode Pro Trimestral 24,30€/Trimestre (Un mes gratis, ahorra un 10%)</h3>
+    <p class="block-subtitle">Incluye:</p>
+    <ul class="plan-description">
+        <li>Todo lo incluido en <b>CepaCode Pro Mensual</b>.</li>
+        <li>Reunión grupal donde podrás:
+            <ul>
+                <li>Conectar con otros compañeros y expertos en Power Platform.</li>
+                <li>Recibir trucos y consejos para obtener mejores oportunidades laborales.</li>
+                <li>Aprender habilidades no técnicas esenciales para el mercado.</li>
+            </ul>
+        </li>
+    </ul>
+    <div class="btn-container">
+        <button class="btn btn-gray">Suscribirme</button>
+        <button class="btn btn-gray">PayPal</button>
+    </div>
+</div>
+
+<!-- Anual -->
+<div class="subscription-block anual">
+    <h3>CepaCode Pro Anual 75,6€/Año (3 meses gratis, ahorra un 25%)</h3>
+    <p class="block-subtitle">Incluye:</p>
+    <ul class="plan-description">
+        <li>Todo lo incluido en <b>CepaCode Pro Trimestral</b>.</li>
+        <li>Acceso a consulta directa conmigo: responde en 24 horas a tus dudas sobre Power Platform.</li>
+        <li>Único pago anual con gran descuento.</li>
+    </ul>
+    <div class="btn-container">
+        <button class="btn btn-gray">Suscribirme</button>
+        <button class="btn btn-gray">PayPal</button>
+    </div>
+</div>
 <!-- Footer -->
 <footer class="footer-custom text-center mt-5 p-4">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
