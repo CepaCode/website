@@ -50,47 +50,40 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        // Get user data from localStorage
         const userData = localStorage.getItem("user");
-    
+
         if (!userData) {
             alert("¡No has iniciado sesión!");
             window.location.href = "signin.html";
             return;
         }
-    
-        // Parse user data
+
         const user = JSON.parse(userData);
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
-    
-        // Validate subscription
+
         const subscription = user.subscription ? user.subscription.toLowerCase() : null;
         const validSubscriptions = ["mensual", "trimestral", "anual"];
-    
+
         if (!validSubscriptions.includes(subscription)) {
             console.error("Invalid or missing subscription:", subscription);
             alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
             window.location.href = "membership.html";
             return;
         }
-    
-        // Set subscription title
+
         document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
-    
-        // Debugging logs
-        console.log("User Subscription:", subscription);
-    
-        // Ensure all buttons are shown
+
+        // Show all buttons
         document.getElementById("practicesBlock").style.display = "block";
         document.getElementById("examsBlock").style.display = "block";
         document.getElementById("clubBlock").style.display = "block";
         document.getElementById("phoneBlock").style.display = "block";
-    
+
         // Set button colors based on subscription
         if (subscription === "mensual") {
             document.getElementById("practicesBlock").classList.add("btn-blue");
             document.getElementById("examsBlock").classList.add("btn-blue");
-            document.getElementById("clubBlock").classList.add("btn-blue");
+            document.getElementById("clubBlock").classList.add("btn-orange"); // 🔥 Fix: Now yellow for mensual
             document.getElementById("phoneBlock").classList.add("btn-orange");
         } else if (subscription === "trimestral") {
             document.getElementById("practicesBlock").classList.add("btn-blue");
@@ -103,14 +96,27 @@
             document.getElementById("clubBlock").classList.add("btn-blue");
             document.getElementById("phoneBlock").classList.add("btn-blue"); // 🔹 Anual gets ALL blue
         }
+
+        // 🔥 Click functionality for yellow buttons (redirect to membership page)
+        document.getElementById("clubBlock").addEventListener("click", function () {
+            if (subscription === "mensual") {
+                window.location.href = "membership.html"; // Redirect mensual users
+            }
+        });
+
+        document.getElementById("phoneBlock").addEventListener("click", function () {
+            if (subscription === "mensual" || subscription === "trimestral") {
+                window.location.href = "membership.html"; // Redirect for mensual & trimestral users
+            } else {
+                const phoneNumber = "+34XXXXXXXXX"; // Replace with your real number
+window.open(`https://wa.me/${phoneNumber.replace("+", "34")}`, "623958609");            }
+        });
     });
-    
-    // Logout function
+
     function logout() {
         localStorage.removeItem("user");
         window.location.href = "signin.html";
     }
-    </script>
-
+</script>
 </body>
 </html>
