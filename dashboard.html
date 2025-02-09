@@ -19,17 +19,23 @@
 
     <!-- Button Section -->
     <div class="d-flex justify-content-center flex-wrap">
-        <button id="practicesButton" class="btn btn-blue m-2">Prácticas de Power Platform</button>
-        <button id="examsButton" class="btn btn-blue m-2">Prácticas de examen</button>
-        <button id="clubButton" class="btn btn-orange m-2">Acceder al Club de los Viernes</button>
-        <button id="phoneButton" class="btn btn-orange m-2">
-            Número de teléfono de Nacho Cepa <img src="whatsapp-icon.png" width="20px">
-        </button>
+<!-- Prácticas de Power Platform -->
+<button id="practicesBlock" style="display: none;">Prácticas de Power Platform</button>
+
+<!-- Prácticas de examen -->
+<button id="examsBlock" style="display: none;">Prácticas de examen</button>
+
+<!-- Acceder al Club de los Viernes -->
+<button id="clubBlock" style="display: none;">Acceder al Club de los Viernes</button>
+
+<!-- Número de teléfono de Nacho Cepa -->
+<button id="phoneBlock" style="display: none;">Número de teléfono de Nacho Cepa</button>        </button>
     </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    // Get user data from localStorage
     const userData = localStorage.getItem("user");
 
     if (!userData) {
@@ -38,30 +44,49 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    // Parse user data
     const user = JSON.parse(userData);
     document.getElementById("userFullName").innerText = user.fullname || "Usuario";
-    const subscription = user.subscription ? user.subscription.toLowerCase() : null;
 
-    if (!["mensual", "trimestral", "anual"].includes(subscription)) {
+    // Validate subscription
+    const subscription = user.subscription ? user.subscription.toLowerCase() : null;
+    const validSubscriptions = ["mensual", "trimestral", "anual"];
+
+    if (!validSubscriptions.includes(subscription)) {
+        console.error("Invalid or missing subscription:", subscription);
         alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
         window.location.href = "membership.html";
         return;
     }
 
+    // Set subscription title
     document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
 
-    // Apply button colors based on subscription type
+    // Debugging logs
+    console.log("User Subscription:", subscription);
+
     if (subscription === "mensual") {
-        document.getElementById("clubButton").classList.add("btn-orange");
-        document.getElementById("phoneButton").classList.add("btn-orange");
+        console.log("Mensual Plan Active - Showing Only Prácticas");
+        document.getElementById("practicesBlock").style.display = "block";
     } else if (subscription === "trimestral") {
-        document.getElementById("clubButton").classList.add("btn-blue");
-        document.getElementById("phoneButton").classList.add("btn-blue");
+        console.log("Trimestral Plan Active - Showing Prácticas + Exámenes + Club de los Viernes");
+        document.getElementById("practicesBlock").style.display = "block";
+        document.getElementById("examsBlock").style.display = "block";
+        document.getElementById("clubBlock").style.display = "block"; // ✅ Now showing for trimestral
     } else if (subscription === "anual") {
-        document.getElementById("clubButton").classList.add("btn-orange");
-        document.getElementById("phoneButton").classList.add("btn-orange");
+        console.log("Anual Plan Active - Showing All Options");
+        document.getElementById("practicesBlock").style.display = "block";
+        document.getElementById("examsBlock").style.display = "block";
+        document.getElementById("clubBlock").style.display = "block";
+        document.getElementById("phoneBlock").style.display = "block"; // ✅ Now showing for anual
     }
 });
+
+// Logout function
+function logout() {
+    localStorage.removeItem("user");
+    window.location.href = "signin.html";
+}
 </script>
 
 </body>
