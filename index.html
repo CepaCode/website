@@ -23,7 +23,6 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                 <li class="nav-item"><a class="nav-link" href="signuporsignin.html">CepaCode Pro</a></li>
-                <li class="nav-item"><a class="nav-link" href="english.html">English</a></li>
             </ul>
         </div>
     </div>
@@ -96,6 +95,23 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center; /* Centers vertically */
     width: 100%;
     margin-top: 15px; /* Adjust margin if necessary */
+}
+.navbar-nav .nav-link {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    background: linear-gradient(135deg, #0171E3, #00B4DB); /* Gradient Text */
+    
+    /* Standard property for broader browser support */
+    background-clip: text;
+    -webkit-background-clip: text; /* Clips background to text for Safari/Chrome */
+    
+    /* Standard property */
+    color: transparent;
+    -webkit-text-fill-color: transparent; /* Makes text take gradient color */
+    
+    transition: all 0.3s ease;
 }
 </style>
 <!-- Carousel -->
