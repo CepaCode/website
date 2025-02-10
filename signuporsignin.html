@@ -64,6 +64,7 @@ body {
 }
 
 /* Block Styling */
+/* Membership Block Styling */
 .membership-block {
     background: #f8f9fa;
     padding: 20px;
@@ -76,8 +77,74 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
+/* Ensure buttons stay at the bottom */
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: auto;
+    padding-bottom: 5px;
+}
+
+/* Blue Gradient - Registrarse */
+.button-modern {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0171E3, #00B4DB);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: inline-block;
+    width: 220px;
+    text-align: center;
+}
+
+.button-modern:hover {
+    background: linear-gradient(135deg, #00B4DB, #0171E3);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button-modern:active {
+    transform: scale(0.98);
+}
+
+/* Green Gradient - Iniciar sesión */
+.button-secondary {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #28A745, #34D058);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: inline-block;
+    width: 220px;
+    text-align: center;
+}
+
+.button-secondary:hover {
+    background: linear-gradient(135deg, #34D058, #28A745);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.button-secondary:active {
+    transform: scale(0.98);
+}
 /* Title Styling */
 .block-title {
     font-weight: bold;
@@ -195,18 +262,21 @@ body {
 </nav>
 <!-- Container for the Sign Up & Sign In Blocks -->
 <div class="container mt-5 d-flex flex-column flex-md-row justify-content-center">
-    <!-- Sign Up Block -->
-    <div class="membership-block text-center">
-        <h3 class="block-title">Únete a CepaCode Pro</h3>
-        <p class="block-text">Accede a reuniones y contenido exclusivo y desarrolla tus habilidades en Power Platform.</p>
+<!-- Sign Up Block -->
+<div class="membership-block text-center">
+    <h3 class="block-title">Únete a CepaCode Pro</h3>
+    <p class="block-text">Accede a contenido exclusivo y desarrolla tus habilidades en Power Platform.</p>
+    <div class="button-wrapper">
         <a href="signup.html" class="button-modern">Registrarse</a>
     </div>
+</div>
 
-    <!-- Sign In Block -->
-    <div class="membership-block text-center">
-        <h3 class="block-title">¿Ya tienes cuenta?</h3>
-        <p class="block-text">Inicia sesión y sigue aprendiendo.</p>
-        <a href="signin.html" class="button-modern">Iniciar sesión</a>
+<!-- Sign In Block -->
+<div class="membership-block text-center">
+    <h3 class="block-title">¿Ya tienes cuenta?</h3>
+    <p class="block-text">Inicia sesión y sigue aprendiendo.</p>
+    <div class="button-wrapper">
+        <a href="signin.html" class="button-secondary">Iniciar sesión</a>
     </div>
 </div>
 
