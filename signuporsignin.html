@@ -24,7 +24,65 @@
         .container {
             flex: 1; /* Pushes footer down */
         }
+/* Fix alignment of blocks to be centered on larger screens */
+.container-flex {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    flex-wrap: wrap; /* Ensure proper wrapping */
+    gap: 20px; /* Add spacing between blocks */
+    min-height: 70vh; /* Adjust height dynamically */
+}
 
+/* Ensure blocks are evenly spaced and aligned */
+.card {
+    width: 320px; /* Fixed width */
+    height: 220px; /* Fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Remove underline from secondary button */
+.button-secondary {
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #28A745, #34D058);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* ✅ Removes underlining */
+    display: inline-block;
+    text-align: center;
+    width: 180px;
+}
+
+.button-secondary:hover {
+    background: linear-gradient(135deg, #34D058, #28A745);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    text-decoration: none; /* ✅ Ensure underline doesn't appear */
+}
+
+.button-secondary:active {
+    transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container-flex {
+        flex-direction: column;
+    }
+}
         .footer-custom {
             background-color: #3a3a3a;
             color: white;
@@ -260,26 +318,21 @@ body {
         </div>
     </div>
 </nav>
-<!-- Container for the Sign Up & Sign In Blocks -->
-<div class="container mt-5 d-flex flex-column flex-md-row justify-content-center">
-<!-- Sign Up Block -->
-<div class="membership-block text-center">
-    <h3 class="block-title">Únete a CepaCode Pro</h3>
-    <p class="block-text">Accede a contenido exclusivo y desarrolla tus habilidades en Power Platform.</p>
-    <div class="button-wrapper">
+<div class="container container-flex">
+    <!-- Registration Block -->
+    <div class="card">
+        <h3>Únete a CepaCode Pro</h3>
+        <p>Accede a contenido exclusivo y desarrolla tus habilidades en Power Platform.</p>
         <a href="signup.html" class="button-modern">Registrarse</a>
     </div>
-</div>
 
-<!-- Sign In Block -->
-<div class="membership-block text-center">
-    <h3 class="block-title">¿Ya tienes cuenta?</h3>
-    <p class="block-text">Inicia sesión y sigue aprendiendo.</p>
-    <div class="button-wrapper">
+    <!-- Login Block -->
+    <div class="card">
+        <h3>¿Ya tienes cuenta?</h3>
+        <p>Inicia sesión y sigue aprendiendo.</p>
         <a href="signin.html" class="button-secondary">Iniciar sesión</a>
     </div>
 </div>
-
 <!-- Footer -->
 <footer class="footer-custom text-center">
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
