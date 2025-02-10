@@ -20,10 +20,11 @@
             min-height: 100vh;
         }
 
-        /* Navigation Bar */
+        /* Navigation Bar - NO Background */
         .navbar {
             padding: 15px 0;
-            background-color: #f8f9fa;
+            background-color: white !important; /* Fully white */
+            box-shadow: none;
         }
 
         /* Gradient Text for Navigation */
@@ -33,13 +34,10 @@
             font-size: 16px;
             text-decoration: none;
             background: linear-gradient(135deg, #0171E3, #00B4DB);
-            
             background-clip: text;
             -webkit-background-clip: text;
-            
             color: transparent;
             -webkit-text-fill-color: transparent;
-            
             transition: all 0.3s ease;
         }
 
@@ -50,20 +48,20 @@
         /* Container for Cards */
         .container-flex {
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
-            flex-wrap: wrap; /* Ensure proper wrapping */
-            gap: 20px; /* Add spacing between blocks */
-            min-height: 70vh; /* Adjust height dynamically */
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            min-height: 70vh;
         }
 
         /* Signup & Login Blocks */
         .card {
-            width: 360px; /* Increased width */
-            height: 260px; /* Increased height */
+            width: 360px;
+            height: 260px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start; /* Reduce space */
             align-items: center;
             text-align: center;
             padding: 20px;
@@ -77,16 +75,22 @@
             text-align: center;
             line-height: 1.2;
             max-width: 90%;
+            margin-bottom: 5px; /* Reduce space below */
         }
 
-        /* Button Wrapper to Keep Buttons Fixed at Bottom */
+        .card p {
+            font-size: 14px;
+            margin-bottom: 5px; /* Reduce space below */
+        }
+
+        /* Button Wrapper - Reduce space */
         .button-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
             width: 100%;
             margin-top: auto;
-            padding-bottom: 5px;
+            padding-bottom: 5px; /* Keep buttons at bottom but reduce space */
         }
 
         /* Primary Button (Registrarse) */
@@ -137,10 +141,12 @@
             text-align: center;
         }
 
+        /* ⬇️ Secondary Button HOVER Effect - Changes Text Color to Dark Green */
         .button-secondary:hover {
             background: linear-gradient(135deg, #34D058, #28A745);
             box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
             text-decoration: none;
+            color: #1C5D23 !important; /* Dark Green */
         }
 
         .button-secondary:active {
@@ -169,7 +175,7 @@
 <body>
 
 <!-- Navigation Menu -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
