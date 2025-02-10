@@ -33,6 +33,63 @@
             text-align: center;
             margin-top: auto; /* Ensures footer stays at bottom */
         }
+        /* Apply Raleway Font */
+body {
+    font-family: 'Raleway', sans-serif !important;
+}
+
+/* Block Styling */
+.membership-block {
+    background: #f8f9fa;
+    padding: 20px;
+    margin: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Title Styling */
+.block-title {
+    font-weight: bold;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+/* Text Styling */
+.block-text {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Modern Button */
+.button-modern {
+    font-family: "Raleway", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0171E3, #00B4DB);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    display: inline-block;
+    width: 220px;
+    text-align: center;
+}
+
+.button-modern:hover {
+    background: linear-gradient(135deg, #00B4DB, #0171E3);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    text-decoration: none;
+}
+
+.button-modern:active {
+    transform: scale(0.98);
+}
     </style>
 </head>
 <body>
@@ -40,42 +97,36 @@
 <!-- Banner -->
 <div class="banner"></div>
 
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- Navigation Menu -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-        <a class="navbar-brand" href="index.html">CepaCode</a>
+        <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="signuporsignin.html">CepaCode Pro</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<!-- Container for the Sign Up & Sign In Blocks -->
+<div class="container mt-5 d-flex flex-column flex-md-row justify-content-center">
+    <!-- Sign Up Block -->
+    <div class="membership-block text-center">
+        <h3 class="block-title">Únete a CepaCode Pro</h3>
+        <p class="block-text">Accede a reuniones y contenido exclusivo y desarrolla tus habilidades en Power Platform.</p>
+        <a href="signup.html" class="button-modern">Registrarse</a>
+    </div>
 
-<!-- Login & Signup Options -->
-<div class="container mt-5">
-    <h2 class="text-center">¿Cómo quieres continuar?</h2>
-
-    <div class="row mt-4">
-        <div class="col-md-6 offset-md-3">
-            <div class="card shadow-lg p-4 mb-4">
-                <h4 class="text-center">¿Ya tienes una cuenta?</h4>
-                <p class="text-center">Inicia sesión para acceder a CepaCode.</p>
-                <a href="signin.html" class="btn btn-primary btn-block">Iniciar sesión</a>
-            </div>
-        </div>
-
-        <div class="col-md-6 offset-md-3">
-            <div class="card shadow-lg p-4">
-                <h4 class="text-center">¿Eres nuevo?</h4>
-                <p class="text-center">Regístrate para empezar a aprender.</p>
-                <a href="signup.html" class="btn btn-success btn-block">Registrarse</a>
-            </div>
-        </div>
+    <!-- Sign In Block -->
+    <div class="membership-block text-center">
+        <h3 class="block-title">¿Ya tienes cuenta?</h3>
+        <p class="block-text">Inicia sesión y sigue aprendiendo.</p>
+        <a href="signin.html" class="button-modern">Iniciar sesión</a>
     </div>
 </div>
 
