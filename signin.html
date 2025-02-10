@@ -33,281 +33,10 @@
             font-size: 16px;
             text-decoration: none;
             background: linear-gradient(135deg, #0171E3, #00B4DB);
-            
             background-clip: text;
             -webkit-background-clip: text;
-            
             color: transparent;
             -webkit-text-fill-color: transparent;
-            
-            transition: all 0.3s ease;
-        }
-
-        .gradient-text:hover {
-            opacity: 0.8; /* Slight dim effect on hover */
-        }
-
-        /* Sign-in Container */
-        html, body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.container-flex {
-    flex: 1; /* Ensures content expands and pushes footer down */
-}
-
-.footer-custom {
-    background-color: #3a3a3a;
-    color: white;
-    width: 100%;
-    height: 100px; /* Fixed height */
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: auto; /* Ensures footer stays at bottom */
-}
-
-        /* Sign-in Block */
-        /* Adjust card height */
-.card {
-    width: 360px;
-    height: 450px; /* Increased height */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-        .card h3 {
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-        }
-
-        /* Input Fields */
-        .form-group {
-            text-align: left;
-            width: 100%;
-        }
-
-        /* Button Wrapper */
-        .button-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            margin-top: auto;
-            padding-bottom: 5px;
-        }
-
-        /* Secondary Button (Iniciar sesión) */
-        .button-secondary {
-            font-family: "Raleway", sans-serif;
-            font-size: 16px;
-            font-weight: bold;
-            color: #ffffff;
-            background: linear-gradient(135deg, #28A745, #34D058);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-decoration: none;
-            display: inline-block;
-            width: 220px;
-            text-align: center;
-        }
-
-        .button-secondary:hover {
-            background: linear-gradient(135deg, #34D058, #28A745);
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-            color: #1c5c2b; /* Dark Green on Hover */
-        }
-
-        .button-secondary:active {
-            transform: scale(0.98);
-        }
-
-        /* Responsive Fix */
-        @media (max-width: 768px) {
-            .container-flex {
-                flex-direction: column;
-            }
-        }
-
-        /* Footer Styling */
-        .footer-custom {
-            background-color: #3a3a3a;
-            color: white;
-            width: 100%;
-            height: 100px; /* Fixed height */
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: auto;
-        }
-    </style>
-</head>
-<body>
-
-<!-- Navigation Menu -->
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link gradient-text" href="index.html">Inicio</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Sign-in Block -->
-<div class="container container-flex">
-    <div class="card">
-        <h3>Iniciar sesión</h3>
-        <form id="loginForm">
-            <div class="form-group">
-                <label>Email</label>
-                <input type="email" id="email" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label>Contraseña</label>
-                <input type="password" id="password" class="form-control" required>
-            </div>
-            <div class="button-wrapper">
-                <button id="loginButton" class="button-secondary" type="submit">Iniciar sesión</button>
-            </div>
-        </form>
-
-        <!-- Forgot Password -->
-        <p class="text-center mt-3">
-            <a href="forgotpassword.html">¿Olvidaste tu contraseña?</a>
-        </p>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer class="footer-custom">
-    <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
-</footer>
-
-<!-- Scripts -->
-<script>
-    document.getElementById("loginForm").addEventListener("submit", async function(event) {
-        event.preventDefault();
-
-        const emailInput = document.getElementById("email");
-        const passwordInput = document.getElementById("password");
-        const loginButton = document.getElementById("loginButton");
-
-        // Disable inputs and button while processing
-        emailInput.disabled = true;
-        passwordInput.disabled = true;
-        loginButton.disabled = true;
-        loginButton.innerText = "Validando...";
-
-        const email = emailInput.value;
-        const password = passwordInput.value;
-        const hashedPassword = btoa(password);
-
-        const data = {
-            ncs_email: email,
-            ncs_password: hashedPassword
-        };
-
-        try {
-            const response = await fetch("https://prod-163.westeurope.logic.azure.com:443/workflows/296b7198aac94a63a916d14860e7c75b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vQWfcinuPGvS4mD8puvcm-sDd-haB2pd8lSowzrxrwg", {
-                method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
-
-            const result = await response.json();
-            console.log("API Response:", result);
-
-            if (response.ok && result.status === "success") {
-                alert("Has iniciado sesión.");
-                localStorage.setItem("user", JSON.stringify({
-                    fullname: result.fullname, 
-                    subscription: result.subscription
-                }));  
-                window.location.href = "dashboard.html";
-            } else {
-                alert("Correo o contraseña incorrectos.");
-            }
-        } catch (error) {
-            console.error("Fetch error:", error);
-            alert("Hubo un problema de conexión.");
-        } finally {
-            emailInput.disabled = false;
-            passwordInput.disabled = false;
-            loginButton.disabled = false;
-            loginButton.innerText = "Iniciar sesión";
-        }
-    });
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar sesión - CepaCode</title>
-    
-    <!-- Bootstrap for Layout -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* Apply Raleway Font */
-        body {
-            font-family: 'Raleway', sans-serif !important;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-
-        /* Navigation Bar */
-        .navbar {
-            padding: 15px 0;
-            background-color: white; /* No background */
-        }
-
-        /* Gradient Text for Navigation */
-        .gradient-text {
-            font-family: 'Raleway', sans-serif;
-            font-weight: bold;
-            font-size: 16px;
-            text-decoration: none;
-            background: linear-gradient(135deg, #0171E3, #00B4DB);
-            
-            background-clip: text;
-            -webkit-background-clip: text;
-            
-            color: transparent;
-            -webkit-text-fill-color: transparent;
-            
             transition: all 0.3s ease;
         }
 
@@ -317,23 +46,23 @@
 
         /* Sign-in Container */
         .container-flex {
+            flex: 1; /* Ensures content expands and pushes footer down */
             display: flex;
             justify-content: center;
             align-items: center;
-            flex-wrap: wrap;
-            min-height: 70vh;
+            min-height: 80vh; /* Ensures proper positioning */
         }
 
         /* Sign-in Block */
         .card {
-            width: 360px;
-            height: 260px;
+            width: 380px;
+            height: auto; /* Let it adjust dynamically */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
@@ -357,8 +86,7 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            margin-top: auto;
-            padding-bottom: 5px;
+            margin-top: 20px;
         }
 
         /* Secondary Button (Iniciar sesión) */
@@ -376,7 +104,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-decoration: none;
             display: inline-block;
-            width: 220px;
+            width: 100%;
             text-align: center;
         }
 
@@ -413,7 +141,7 @@
 </head>
 <body>
 
-<!-- Navigation Menu -->
+<!-- Navigation Menu (Only One!) -->
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
@@ -498,10 +226,6 @@
 
             if (response.ok && result.status === "success") {
                 alert("Has iniciado sesión.");
-                localStorage.setItem("user", JSON.stringify({
-                    fullname: result.fullname, 
-                    subscription: result.subscription
-                }));  
                 window.location.href = "dashboard.html";
             } else {
                 alert("Correo o contraseña incorrectos.");
