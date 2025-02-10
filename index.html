@@ -11,22 +11,21 @@
 <body>
 
 <!-- Navigation Menu -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="signuporsignin.html">Cursos</a></li>
-                <li class="nav-item"><a class="nav-link" href="english.html">English</a></li>
-            </ul>
+   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signuporsignin.html">CepaCode Pro</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 <!-- Full-Width Banner -->
 <div class="container-fluid p-0">
@@ -96,6 +95,57 @@
 
 <!-- Custom CSS -->
 <style>
+    body {
+            margin: 0;
+            font-family: "Arial", sans-serif;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            padding: 15px 30px;
+            padding-right: 50px;
+            color: black;
+            font-weight: bold;
+            height: 60px;
+            width: 100%;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar .logo {
+            font-size: 20px;
+        }
+        
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .navbar .nav-links a {
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #0171E3, #00B4DB);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: opacity 0.3s ease;
+        }
+        
+        .navbar .nav-links a:hover {
+            opacity: 0.8;
+        }
+        
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                padding-right: 30px;
+            }
+            .navbar .nav-links {
+                gap: 15px;
+            }
+        }
     /* Styled border for the carousel */
     .carousel-container {
         border: 2px solid rgba(255, 255, 255, 0.3);
