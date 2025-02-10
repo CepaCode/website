@@ -56,42 +56,43 @@
         }
 
         /* Signup & Login Blocks */
-        .card {
-            width: 360px;
-            height: 260px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start; /* Reduce space */
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+.card {
+    width: 360px;
+    height: 260px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Maintain balance */
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-        .card h3 {
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            line-height: 1.2;
-            max-width: 90%;
-            margin-bottom: 5px; /* Reduce space below */
-        }
+/* Adjusted Text Spacing */
+.card h3 {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.2;
+    max-width: 90%;
+    margin-bottom: 5px; /* Reduce space below */
+}
 
-        .card p {
-            font-size: 14px;
-            margin-bottom: 5px; /* Reduce space below */
-        }
+.card p {
+    font-size: 14px;
+    margin-bottom: 10px; /* Reduce space below */
+}
 
-        /* Button Wrapper - Reduce space */
-        .button-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            margin-top: auto;
-            padding-bottom: 5px; /* Keep buttons at bottom but reduce space */
-        }
+/* Button Wrapper - Keeps Buttons at Bottom with Less Space */
+.button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: auto;
+    padding-bottom: 10px; /* Reduced padding */
+}
 
         /* Primary Button (Registrarse) */
         .button-modern {
