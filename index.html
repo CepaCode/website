@@ -42,13 +42,15 @@
     </div>
 
     <!-- Right Section: Text + Button -->
-    <div class="col-md-6 text-center d-flex flex-column justify-content-center">
-        <h2 style="font-family: 'Raleway', sans-serif; font-weight: bold; font-size: 24px;">
-            Aprende Power Platform conmigo. <br> 
-            Adquiere todas las habilidades con CepaCode Pro
-        </h2>
-        <a href="signuporsignin.html" class="button-modern mt-3">CepaCode Pro</a>
+<div class="col-md-6 text-center d-flex flex-column justify-content-center">
+    <h2 style="font-family: 'Raleway', sans-serif; font-weight: bold; font-size: 24px;">
+        Aprende Power Platform conmigo. <br> 
+        Adquiere todas las habilidades con CepaCode Pro
+    </h2>
+    <div class="button-container">
+        <a href="signuporsignin.html" class="button-modern">CepaCode Pro</a>
     </div>
+</div>
 </div>
 
 <!-- Button Styling -->
@@ -87,6 +89,13 @@ h1, h2, h3, h4, h5, h6 {
 
 .button-modern:active {
     transform: scale(0.98);
+}
+.button-container {
+    display: flex;
+    justify-content: center; /* Centers the button horizontally */
+    align-items: center; /* Centers vertically */
+    width: 100%;
+    margin-top: 15px; /* Adjust margin if necessary */
 }
 </style>
 <!-- Carousel -->
