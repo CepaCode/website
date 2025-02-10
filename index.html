@@ -11,52 +11,72 @@
 <body>
 
 <!-- Navigation Menu -->
-   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signuporsignin.html">CepaCode Pro</a></li>
-                </ul>
-            </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="signuporsignin.html">CepaCode Pro</a></li>
+                <li class="nav-item"><a class="nav-link" href="english.html">English</a></li>
+            </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <!-- Full-Width Banner -->
 <div class="container-fluid p-0">
     <img src="homeheader.png" alt="CepaCode Banner" class="img-fluid w-100">
 </div>
 
-<!-- Title -->
-<div class="container mt-5 text-center">
-    <h1 style="font-size: 36px; font-weight: bold;">¡Bienvenid@ a CepaCode!</h1>
-</div>
-<!-- Action Buttons -->
-<div class="container text-center mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-4 mb-3"> <!-- Added mb-3 here for spacing on mobile -->
-            <a href="https://shorturl.at/O5zEA"
-                class="btn btn-dark btn-lg btn-block">
-                <i class="fas fa-handshake"></i> Trabajemos juntos
-            </a>
-        </div>
-        <div class="col-md-4">
-            <a href="https://shorturl.at/cedA9"
-                class="btn btn-primary btn-lg btn-block">
-                <i class="fas fa-coffee"></i> Tomemos café
-            </a>
-        </div>
+<!-- 1st Block: Horizontal Container -->
+<div class="container mt-5 d-flex align-items-center justify-content-center">
+    <!-- Left Section: Image -->
+    <div class="col-md-6 text-center">
+        <img src="laptop.png" alt="Laptop" class="img-fluid" style="max-width: 250px;">
+    </div>
+
+    <!-- Right Section: Text + Button -->
+    <div class="col-md-6 text-center d-flex flex-column justify-content-center">
+        <h2 style="font-family: 'Raleway', sans-serif; font-weight: bold; font-size: 24px;">
+            Aprende Power Platform conmigo. <br> 
+            Adquiere todas las habilidades con CepaCode Pro
+        </h2>
+        <a href="signuporsignin.html" class="button-modern mt-3">CepaCode Pro</a>
     </div>
 </div>
-<!-- Title -->
-<div class="container mt-5 text-center">
-    <h1 style="font-size: 28px; font-weight: bold;">También puedes acceder a mis Cursos para practicar Power Platform conmigo y certificarte. Utiliza la opción Cursos en los botones de navegación de arriba a la derecha.</h1>
-</div>
+
+<!-- Button Styling -->
+<style>
+    .button-modern {
+        font-family: "Arial", sans-serif;
+        font-size: 16px;
+        font-weight: bold;
+        color: #ffffff;
+        background: linear-gradient(135deg, #0171E3, #00B4DB);
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .button-modern:hover {
+        background: linear-gradient(135deg, #00B4DB, #0171E3);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .button-modern:active {
+        transform: scale(0.98);
+    }
+</style>
 <!-- Carousel -->
 <div id="speakerCarousel" class="carousel slide mt-5" data-ride="carousel">
     <div class="carousel-inner">
@@ -95,57 +115,6 @@
 
 <!-- Custom CSS -->
 <style>
-    body {
-            margin: 0;
-            font-family: "Arial", sans-serif;
-        }
-        
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            padding: 15px 30px;
-            padding-right: 50px;
-            color: black;
-            font-weight: bold;
-            height: 60px;
-            width: 100%;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        
-        .navbar .logo {
-            font-size: 20px;
-        }
-        
-        .navbar .nav-links {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .navbar .nav-links a {
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #0171E3, #00B4DB);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: opacity 0.3s ease;
-        }
-        
-        .navbar .nav-links a:hover {
-            opacity: 0.8;
-        }
-        
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-                padding-right: 30px;
-            }
-            .navbar .nav-links {
-                gap: 15px;
-            }
-        }
     /* Styled border for the carousel */
     .carousel-container {
         border: 2px solid rgba(255, 255, 255, 0.3);
