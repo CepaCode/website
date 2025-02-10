@@ -7,6 +7,7 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -52,30 +53,41 @@
 
 <!-- Button Styling -->
 <style>
+    body {
+    font-family: 'Raleway', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Raleway', sans-serif !important;
+    font-weight: bold;
+}
     .button-modern {
-        font-family: "Arial", sans-serif;
-        font-size: 16px;
-        font-weight: bold;
-        color: #ffffff;
-        background: linear-gradient(135deg, #0171E3, #00B4DB);
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        text-decoration: none;
-        display: inline-block;
-    }
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(135deg, #0171E3, #00B4DB);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none; /* Remove underline */
+    display: inline-block;
+    width: 180px; /* Fixed width */
+    text-align: center; /* Ensure text is centered */
+}
 
-    .button-modern:hover {
-        background: linear-gradient(135deg, #00B4DB, #0171E3);
-        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    }
+.button-modern:hover {
+    background: linear-gradient(135deg, #00B4DB, #0171E3);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    text-decoration: none; /* Ensure underline doesn't appear on hover */
+}
 
-    .button-modern:active {
-        transform: scale(0.98);
-    }
+.button-modern:active {
+    transform: scale(0.98);
+}
 </style>
 <!-- Carousel -->
 <div id="speakerCarousel" class="carousel slide mt-5" data-ride="carousel">
