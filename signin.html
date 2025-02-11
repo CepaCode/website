@@ -226,6 +226,10 @@
 
             if (response.ok && result.status === "success") {
                 alert("Has iniciado sesión.");
+                localStorage.setItem("user", JSON.stringify({
+                    fullname: result.fullname, 
+                    subscription: result.subscription
+                }));
                 window.location.href = "dashboard.html";
             } else {
                 alert("Correo o contraseña incorrectos.");
