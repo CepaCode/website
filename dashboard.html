@@ -23,10 +23,6 @@
         }
         .subscription-block h3 {
             margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
         .block-subtitle {
             font-size: 14px;
@@ -47,7 +43,6 @@
         }
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
-        .icon-img { width: 35px; height: 35px; margin-left: 10px; }
         #featuresContainer {
             display: grid;
             grid-template-columns: repeat(2, minmax(350px, 1fr));
@@ -80,7 +75,7 @@
 
 <!-- Membership Section -->
 <div class="container mt-5">
-    <h2 id="subscriptionTitle" class="text-center">CepaCode Pro</h2>
+    <h2 class="text-center">CepaCode Pro</h2>
     <p class="text-center">¡Bienvenid@ a tu zona exclusiva, <span id="userFullName"></span>!</p>
     <div id="featuresContainer"></div>
 </div>
@@ -96,10 +91,10 @@
 
         const user = JSON.parse(userData);
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
-        const subscription = user.subscription ? user.subscription.toLowerCase() : null;
+        const subscription = user.subscription ? user.subscription.toLowerCase() : "basic"; // Default to 'basic'
         const featuresContainer = document.getElementById("featuresContainer");
 
-        function createFeatureBlock(title, subtitle, id, colorClass, onClickHandler, iconURL, buttonText, price, description) {
+        function createFeatureBlock(title, subtitle, id, hasAccess, onClickHandler, buttonText, price, description) {
             const block = document.createElement("div");
             block.classList.add("subscription-block");
             
@@ -108,7 +103,7 @@
             
             const priceTag = document.createElement("p");
             priceTag.classList.add("block-subtitle");
-            priceTag.innerHTML = price;
+            priceTag.innerHTML = hasAccess ? "Tienes acceso" : price;
             
             const desc = document.createElement("p");
             desc.classList.add("block-subtitle");
@@ -116,7 +111,7 @@
 
             const button = document.createElement("button");
             button.id = id;
-            button.classList.add("btn", "btn-block-custom", colorClass);
+            button.classList.add("btn", "btn-block-custom", hasAccess ? "btn-blue" : "btn-green");
             button.textContent = buttonText;
             button.onclick = onClickHandler;
 
@@ -127,15 +122,54 @@
             featuresContainer.appendChild(block);
         }
 
-        createFeatureBlock("CepaCode Basic", "Accede a todo mi contenido gratuito en YouTube", "basicBlock", "btn-blue", () => window.open("https://youtube.com", "_blank"), null, "YouTube", "Tienes acceso", "Newsletter mensual sobre Power Platform.");
+        // User subscription logic for button colors
+        const isMensual = subscription === "mensual" || subscription === "trimestral" || subscription === "anual";
+        const isTrimestral = subscription === "trimestral" || subscription === "anual";
+        const isAnual = subscription === "anual";
 
-        if (subscription === "mensual" || subscription === "trimestral" || subscription === "anual") {
-            createFeatureBlock("CepaCode Pro Mensual", "Formación práctica y exámenes", "proMensual", "btn-blue", () => window.location.href = "practicas.html", null, "Ir a Prácticas", "Tienes acceso", "Aprende sobre Power Platform con cursos estructurados.");
-        }
+        createFeatureBlock(
+            "YouTube & Newsletter",
+            "Accede a contenido gratuito en YouTube y recibe nuestra newsletter.",
+            "basicBlock",
+            true,
+            () => window.open("https://youtube.com", "_blank"),
+            "YouTube",
+            "",
+            "Newsletter mensual sobre Power Platform."
+        );
 
-        if (subscription === "trimestral" || subscription === "anual") {
-            createFeatureBlock("CepaCode Pro Trimestral", "Acceso al Club de los Viernes", "clubBlock", "btn-blue", () => window.open("https://teams.microsoft.com", "_blank"), "teams.png", "Ir al Club de los Viernes", "Tienes acceso", "Únete a nuestras reuniones semanales.");
-        }
+        createFeatureBlock(
+            "Prácticas y Exámenes",
+            "Formación práctica y preparación para certificaciones.",
+            "proMensual",
+            isMensual,
+            () => window.location.href = isMensual ? "practicas.html" : "payment.html",
+            isMensual ? "Ir a Prácticas" : "Obtener por 9€/mes",
+            "9€/mes",
+            "Aprende sobre Power Platform con cursos estructurados."
+        );
+
+        createFeatureBlock(
+            "Club de los Viernes",
+            "Sesiones en directo con la comunidad Power Platform.",
+            "clubBlock",
+            isTrimestral,
+            () => window.open(isTrimestral ? "https://teams.microsoft.com" : "payment.html", "_blank"),
+            isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
+            "24,30€/trimestre",
+            "Únete a nuestras reuniones semanales."
+        );
+
+        createFeatureBlock(
+            "Consultas Directas",
+            "Soporte personal en Power Platform.",
+            "consultasBlock",
+            isAnual,
+            () => window.open(isAnual ? "mailto:support@cepacode.com" : "payment.html", "_blank"),
+            isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
+            "75,60€/año",
+            "¡Pregúntame lo que quieras!"
+        );
     });
 
     function logout() {
