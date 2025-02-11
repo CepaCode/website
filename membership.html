@@ -4,197 +4,193 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membresía - CepaCode</title>
+
+    <!-- Bootstrap for Layout -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Ensure text is always black */
+        /* Apply Raleway Font */
         body {
-            font-family: Arial, sans-serif;
-            color: black;
+            font-family: 'Raleway', sans-serif !important;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Style subscription blocks */
-        .subscription-block {
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            text-align: left;
-            box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); /* Drop shadow */
-        }
-
-        /* Background colors */
-        .mensual {
-            background-color: #e7e7e7; /* Soft blue */
-        }
-
-        .trimestral {
-            background-color: #e7e7e7; /* Standard blue */
-        }
-
-        .anual {
-            background-color: #e7e7e7; /* Stronger blue */
-        }
-        /* Background for CepaCode Basic */
-.basic {
-    background-color: #f5f5f5; /* Light gray */
-}
-
-        /* Ensure buttons look good inside blue blocks */
-        .btn-gray {
+        /* Navigation Bar */
+        .navbar {
+            padding: 15px 0;
             background-color: white;
-            color: black;
-            border: 1px solid #000;
-            font-weight: bold;
         }
 
-        /* Center title */
-        h2 {
+        /* Subscription Container */
+        .container-flex {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 40px 0;
+            flex: 1;
+        }
+
+        /* Subscription Block */
+        .subscription-block {
+            width: 360px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             text-align: center;
-            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #f5f5f5;
         }
 
-        /* Style subtitles */
-        .block-subtitle {
-            font-size: 16px;
+        .subscription-block h3 {
+            font-size: 22px;
             font-weight: bold;
-            margin-bottom: 10px;
+            text-align: center;
+            line-height: 1.2;
         }
 
+        /* Plan Description */
         .plan-description {
             font-size: 14px;
-            margin-top: 10px;
+            text-align: left;
+            width: 90%;
+            margin-bottom: 15px;
         }
 
-        /* Button alignment */
-        .btn-container {
+        /* Button Wrapper */
+        .button-wrapper {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+            margin-top: auto;
+            padding-bottom: 5px;
+        }
+
+        /* Blue Buttons */
+        .button-blue {
+            font-family: "Raleway", sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(135deg, #0171E3, #00B4DB);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
             text-align: center;
-            margin-top: 15px;
+            display: block;
+            width: 100%;
         }
 
-        /* Footer styling */
+        .button-blue:hover {
+            background: linear-gradient(135deg, #00B4DB, #0171E3);
+            text-decoration: none;
+        }
+
+        /* Green Buttons */
+        .button-green {
+            font-family: "Raleway", sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            color: #ffffff;
+            background: linear-gradient(135deg, #28A745, #34D058);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+
+        .button-green:hover {
+            background: linear-gradient(135deg, #34D058, #28A745);
+        }
+
+        /* Footer Styling */
         .footer-custom {
             background-color: #3a3a3a;
             color: white;
-            padding: 20px;
+            width: 100%;
+            height: 100px;
             text-align: center;
-            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: auto;
         }
 
-        /* Icon styling */
-        .icon-img {
-            width: 35px;
-            height: 35px;
-        }
-
-        /* Small Icons for Text */
-        .icon-small {
-            width: 20px;
-            height: 20px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- Navigation Menu -->
+<nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand" href="index.html">CepaCode</a>
+        <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link" href="signin.html">Iniciar sesión</a></li>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link gradient-text" href="signin.html">Cerrar sesión</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
 <!-- Membership Plans -->
-<div class="container mt-5">
-    <h1>Elige tu suscripción CepaCode</h1>
-    <h2 class="text-center">Mejora tus habilidades en Power Platform con formación progresiva y estructurada. Reúnete conmigo y con compañeros del mundo Power Platform en nuestro Club de los Viernes y envíame un whatsapp directamente cuando tengas cualquier duda.</h2>
-<!-- CepaCode Basic -->
-<div class="subscription-block basic">
-    <h3><strong>CepaCode Basic 0€/mes</strong></h3>
-    <p class="block-subtitle">Incluye:</p>
-    <ul class="plan-description">
-        <li>Todo mi contenido en YouTube.</li>
-        <li>Newsletter mensual en la que te comparto novedades sobre Power Platform.</li>
-    </ul>
-    <p><i>Como ya estás registrado, CepaCode Basic ya es tuyo y recibirás la newsletter :)</i></p>
-    <div class="btn-container">
+<div class="container container-flex">
+    <h1 class="text-center">Elige tu suscripción CepaCode</h1>
+    <h2 class="text-center">Mejora tus habilidades en Power Platform con formación estructurada.</h2>
+
+    <!-- CepaCode Basic -->
+    <div class="subscription-block">
+        <h3>CepaCode Basic - 0€/mes</h3>
+        <p class="plan-description">Accede a contenido gratuito en YouTube y recibe nuestra newsletter mensual con novedades sobre Power Platform.</p>
     </div>
-</div>
+
     <!-- Mensual -->
-    <div class="subscription-block mensual">
-        <h3><strong>CepaCode Pro Mensual 9€/mes</strong></h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Formación sobre Power Apps y Power Automate guiada, estructurada y progresiva para adquirir un gran conocimiento sobre Power Platform en menos tiempo.</li>
-            <li>Todas las preparaciones de exámenes para certificarte y demostrarle al mundo que tienes las capacidades técnicas para desempeñarte como profesional: Power Platform Fundamentals PL900, Power Platform Functional Consultant PL200 y Power Platform Solutions Architect PL600.</li>
-        </ul>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
+    <div class="subscription-block">
+        <h3>CepaCode Pro Mensual - 9€/mes</h3>
+        <p class="plan-description">Formación progresiva sobre Power Platform con acceso a todos los cursos y preparación para certificaciones PL900, PL200 y PL600.</p>
+        <div class="button-wrapper">
+            <a href="checkout.html?plan=mensual" class="button-blue">Suscribirme</a>
+            <a href="checkout_paypal.html?plan=mensual" class="button-blue">PayPal</a>
         </div>
     </div>
 
     <!-- Trimestral -->
-    <div class="subscription-block trimestral">
-        <h3>
-            <strong>CepaCode Pro Trimestral 24,30€/Trimestre</strong>
-            <b>10% de descuento</b>
-            <img src="https://cdn0.iconfinder.com/data/icons/logos-microsoft-office-365/128/Microsoft_Office-10-512.png" alt="Teams Icon" class="icon-img">
-        </h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Todo lo incluido en <b>CepaCode Pro Mensual</b>.</li>
-            <li><b>Descucento de un 10%</b> comparado con el plan mensual.</li>
-            <li>
-                <img src="https://cdn0.iconfinder.com/data/icons/logos-microsoft-office-365/128/Microsoft_Office-10-512.png" alt="Teams Icon" class="icon-small">
-                <b>Acceso al Club de los Viernes:</b> establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform. Hablaremos de cómo obtener mejores carreras profesionales, mejores salarios y de cómo adquirir esas habilidades no técnicas que te harán único en el mercado.
-                <br><br>
-                🕒 <b>Horarios los viernes:</b> <br>
-                🇲🇽 México DF: 09:00 <br>
-                🇨🇴 Bogotá: 10:00 <br>
-                🇵🇪 Lima: 10:00 <br>
-                🇦🇷 Buenos Aires: 12:00 <br>
-                🇨🇱 Santiago: 12:00 <br>
-                🇪🇸 Madrid: 16:00 <br>
-                <br>
-                <i>Si no puedes acceder en el horario, no te preocupes, tendrás acceso a todas las grabaciones.</i>
-            </li>
-        </ul>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
+    <div class="subscription-block">
+        <h3>CepaCode Pro Trimestral - 24,30€/Trimestre</h3>
+        <p class="plan-description">Accede a todo el contenido de CepaCode Pro Mensual con un 10% de descuento. Incluye acceso al Club de los Viernes.</p>
+        <div class="button-wrapper">
+            <a href="checkout.html?plan=trimestral" class="button-blue">Suscribirme</a>
+            <a href="checkout_paypal.html?plan=trimestral" class="button-blue">PayPal</a>
         </div>
     </div>
 
     <!-- Anual -->
-    <div class="subscription-block anual">
-        <h3>
-            <strong>CepaCode Pro Anual 75,60€/Año</strong>
-            <b>25% de descuento</b>
-            <img src="https://cdn0.iconfinder.com/data/icons/logos-microsoft-office-365/128/Microsoft_Office-10-512.png" alt="Teams Icon" class="icon-img">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Icon" class="icon-img">
-        </h3>
-        <p class="block-subtitle">Incluye:</p>
-        <ul class="plan-description">
-            <li>Todo lo incluido en <b>CepaCode Pro Trimestral</b>.</li>
-            <li><b>Descucento de un 25%</b> comparado con el plan mensual.</li>
-            <li>
-                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp Icon" class="icon-small">
-                <b>Consulta directa:</b> Respondo en 24 horas a tus dudas sobre Power Platform.
-            </li>
-        </ul>
-        <div class="btn-container">
-            <button class="btn btn-gray">Suscribirme</button>
-            <button class="btn btn-gray">PayPal</button>
+    <div class="subscription-block">
+        <h3>CepaCode Pro Anual - 75,60€/Año</h3>
+        <p class="plan-description">Accede a todo el contenido con un 25% de descuento y obtén consultas directas por WhatsApp.</p>
+        <div class="button-wrapper">
+            <a href="checkout.html?plan=anual" class="button-blue">Suscribirme</a>
+            <a href="checkout_paypal.html?plan=anual" class="button-blue">PayPal</a>
         </div>
     </div>
 </div>
