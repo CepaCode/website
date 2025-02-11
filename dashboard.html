@@ -9,18 +9,18 @@
         .btn-blue { background: linear-gradient(135deg, #0171E3, #00B4DB); color: white; }
         .btn-green { background: linear-gradient(135deg, #28A745, #34D058); color: white; }
         .subscription-block {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ensures responsiveness */
-    min-height: 280px; /* Ensures all blocks have equal height */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Pushes button to bottom */
-    align-items: center;
-}
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
         .subscription-block h3 {
             margin-bottom: 15px;
             display: flex;
@@ -31,41 +31,34 @@
         .block-subtitle {
             font-size: 14px;
             color: #555;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
         .btn-block-custom {
-    display: inline-block; 
-    width: 220px; /* Consistent button width */
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: auto; /* Pushes button to bottom */
-    margin-bottom: 5px; /* Ensures 5px spacing from bottom */
-    text-align: center; /* Centers text inside */
-}
+            width: 220px;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 5px;
+            text-align: center;
+        }
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
-        .icon-img {
-            width: 35px;
-            height: 35px;
-            margin-left: 10px;
-        }
+        .icon-img { width: 35px; height: 35px; margin-left: 10px; }
         #featuresContainer {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(350px, 1fr)); /* Forces 2 columns */
-    grid-template-rows: repeat(2, auto); /* Forces 2 rows */
-    gap: 20px; /* Adds consistent spacing */
-    justify-content: center; /* Centers the grid */
-    align-items: start; /* Ensures all items align evenly */
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto; /* Centers the entire container */
-    text-align: center; /* Centers text inside */
-}
+            display: grid;
+            grid-template-columns: repeat(2, minmax(350px, 1fr));
+            gap: 20px;
+            justify-content: center;
+            align-items: start;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -74,8 +67,7 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand font-weight-bold" href="index.html">CepaCode</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
@@ -90,16 +82,12 @@
 <div class="container mt-5">
     <h2 id="subscriptionTitle" class="text-center">CepaCode Pro</h2>
     <p class="text-center">¡Bienvenid@ a tu zona exclusiva, <span id="userFullName"></span>!</p>
-
-    <div id="featuresContainer">
-        <!-- Blocks will be dynamically inserted -->
-    </div>
+    <div id="featuresContainer"></div>
 </div>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const userData = localStorage.getItem("user");
-
         if (!userData) {
             alert("¡No has iniciado sesión!");
             window.location.href = "signin.html";
@@ -108,38 +96,23 @@
 
         const user = JSON.parse(userData);
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
-
         const subscription = user.subscription ? user.subscription.toLowerCase() : null;
-        const validSubscriptions = ["mensual", "trimestral", "anual"];
-
-        if (!validSubscriptions.includes(subscription)) {
-            alert("Tu suscripción no es válida. Por favor, contacta con soporte.");
-            window.location.href = "membership.html";
-            return;
-        }
-
-        document.getElementById("subscriptionTitle").textContent = `CepaCode Pro ${subscription}`;
-
         const featuresContainer = document.getElementById("featuresContainer");
 
-        function createFeatureBlock(title, subtitle, id, colorClass, onClickHandler, iconURL = null, buttonText) {
+        function createFeatureBlock(title, subtitle, id, colorClass, onClickHandler, iconURL, buttonText, price, description) {
             const block = document.createElement("div");
             block.classList.add("subscription-block");
-
+            
             const heading = document.createElement("h3");
-            const titleText = document.createTextNode(title);
-            heading.appendChild(titleText);
-
-            if (iconURL) {
-                const icon = document.createElement("img");
-                icon.src = iconURL;
-                icon.classList.add("icon-img");
-                heading.appendChild(icon);
-            }
-
-            const subtext = document.createElement("p");
-            subtext.classList.add("block-subtitle");
-            subtext.innerHTML = subtitle;
+            heading.textContent = title;
+            
+            const priceTag = document.createElement("p");
+            priceTag.classList.add("block-subtitle");
+            priceTag.innerHTML = price;
+            
+            const desc = document.createElement("p");
+            desc.classList.add("block-subtitle");
+            desc.innerHTML = description;
 
             const button = document.createElement("button");
             button.id = id;
@@ -148,73 +121,21 @@
             button.onclick = onClickHandler;
 
             block.appendChild(heading);
-            block.appendChild(subtext);
+            block.appendChild(priceTag);
+            block.appendChild(desc);
             block.appendChild(button);
             featuresContainer.appendChild(block);
         }
 
-        // ✅ Prácticas
-        createFeatureBlock(
-            "Prácticas de Power Apps y Power Automate",
-            "Accede a más de 50 horas de ejercicios prácticos para mejorar tus habilidades en Power Platform. Cursos estructurados y progresivos para nivel básico, intermedio y avanzado",
-            "practicasBlock",
-            "btn-blue",
-            () => window.location.href = "cepacodepracticas.html",
-            null,
-            "Acceder a Prácticas"
-        );
+        createFeatureBlock("CepaCode Basic", "Accede a todo mi contenido gratuito en YouTube", "basicBlock", "btn-blue", () => window.open("https://youtube.com", "_blank"), null, "YouTube", "Tienes acceso", "Newsletter mensual sobre Power Platform.");
 
-        // ✅ Exámenes (Trimestral & Anual)
         if (subscription === "mensual" || subscription === "trimestral" || subscription === "anual") {
-            createFeatureBlock(
-                "Preparación de exámenes para certificaciones",
-                "Prepara tus exámenes de certificación para Power Platform Fundamentals (PL900), Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).",
-                "examenesBlock",
-                "btn-blue",
-                () => window.location.href = "cepacodeexamenes.html",
-                null,
-                "Acceder a Exámenes"
-            );
+            createFeatureBlock("CepaCode Pro Mensual", "Formación práctica y exámenes", "proMensual", "btn-blue", () => window.location.href = "practicas.html", null, "Ir a Prácticas", "Tienes acceso", "Aprende sobre Power Platform con cursos estructurados.");
         }
 
-        // ✅ Club de los Viernes (With Teams Icon)
-        createFeatureBlock(
-            "Acceder al Club de los Viernes",
-            "Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform. Podrás preguntar a mí o a los compañeros dudas e inquietudes sobre cualquier tema.",
-            "clubBlock",
-            subscription === "mensual" ? "btn-green" : "btn-blue",
-            () => {
-                if (subscription === "mensual") {
-                    window.location.href = "membership.html";
-                } else {
-                    window.open("https://teams.microsoft.com/l/meetup-join/XYZ_LINK", "_blank");
-                }
-            },
-            "https://cdn0.iconfinder.com/data/icons/logos-microsoft-office-365/128/Microsoft_Office-10-512.png",
-            subscription === "mensual"
-                ? "Información sobre el Club de los Viernes"
-                : "Acceder al Club de los Viernes"
-        );
-
-        // ✅ Consultas Directas (With WhatsApp Icon)
-        createFeatureBlock(
-            "Consultas directas",
-            "Envíame un mensaje por WhatsApp y te contesto en menos de 24 horas para ayudarte con tu problema Power Platform o si tienes alguna pregunta relacionada con tu carrera profesional.",
-            "phoneBlock",
-            subscription === "mensual" || subscription === "trimestral" ? "btn-green" : "btn-blue",
-            () => {
-                if (subscription === "mensual" || subscription === "trimestral") {
-                    window.location.href = "membership.html";
-                } else {
-                    window.open("https://wa.me/34623958609", "_blank");
-                }
-            },
-            "https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png",
-            subscription === "mensual" || subscription === "trimestral"
-                ? "Información sobre Consultas Directas"
-                : "Consultas directas"
-        );
-
+        if (subscription === "trimestral" || subscription === "anual") {
+            createFeatureBlock("CepaCode Pro Trimestral", "Acceso al Club de los Viernes", "clubBlock", "btn-blue", () => window.open("https://teams.microsoft.com", "_blank"), "teams.png", "Ir al Club de los Viernes", "Tienes acceso", "Únete a nuestras reuniones semanales.");
+        }
     });
 
     function logout() {
