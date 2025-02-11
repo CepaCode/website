@@ -6,6 +6,14 @@
     <title>CepaCode Pro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        .footer-custom {
+    background-color: #3a3a3a;
+    color: white;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    margin-top: auto; /* Ensures footer stays at bottom */
+}
         .btn-blue { background: linear-gradient(135deg, #0171E3, #00B4DB); color: white; }
         .btn-green { background: linear-gradient(135deg, #28A745, #34D058); color: white; }
         .subscription-block {
@@ -40,8 +48,8 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
-    margin-top: 24px; /* Ensures price is always 24px below the title */
-    margin-bottom: 10px; /* Keeps a small gap before the description */
+    margin-top: 16px; /* Ensures price is always 24px below the title */
+    margin-bottom: 16px; /* Keeps a small gap before the description */
 }
         .btn-block-custom {
             width: 280px;
@@ -101,7 +109,10 @@
     <p class="text-center">¡Bienvenid@ a tu zona exclusiva, <span id="userFullName"></span>!</p>
     <div id="featuresContainer"></div>
 </div>
-
+<!-- Footer -->
+<footer class="footer-custom">
+    <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
+</footer>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const userData = localStorage.getItem("user");
@@ -198,7 +209,6 @@
             Accede al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.
             </ul>
            <p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
-
 <div style="display: flex; justify-content: center; gap: 30px;">
     <ul style="list-style: none; padding: 0;">
         <li>🇲🇽 México DF: 09:00</li>
@@ -240,12 +250,12 @@
             isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
             "75,60€/año",
             `<p>¡Aquí lo tienes!</p>
-            <p>Te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que da error y no sabes por qué o cómo mejorar tu carrera profesional y llegar a obtener salarios de 30k, 40k o 50k.</p>`,
+            <p>Te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</p>`,
             `<ul>
                 <li>Descuento del 25%.</li>
                 <li>Acceso a prácticas y exámenes.</li>
                 <li>Acceso al Club de los Viernes.</li>
-                <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que da error y no sabes por qué o cómo mejorar tu carrera profesional y llegar a obtener salarios de 30k, 40k o 50k.</li>               
+                <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</li>               
             </ul>`
         );
     });
