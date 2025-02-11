@@ -163,55 +163,57 @@
         const isTrimestral = subscription === "trimestral" || subscription === "anual";
         const isAnual = subscription === "anual";
 
-        // **YouTube & Newsletter Block (Always Blue)**
-        createFeatureBlock(
-            "YouTube & Newsletter",
-            "basicBlock",
-            true,
-            () => window.open("https://youtube.com/cepacode", "_blank"),
-            "YouTube",
-            "",
-            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
-            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`,
-            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
-            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`
-        );
+       // **YouTube & Newsletter Block (Always Blue)**
+createFeatureBlock(
+    "YouTube & Newsletter",
+    "basicBlock",
+    true,
+    () => window.open("https://youtube.com/cepacode", "_blank"),
+    "YouTube",
+    "",
+    `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
+    Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`,
+    `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
+    Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`
+);
 
-        // **Prácticas y Exámenes Block**
-        createFeatureBlock(
-            "Prácticas y Exámenes",
-            "proMensual",
-            isMensual,
-            () => window.location.href = isMensual ? "practicas.html" : "payment.html",
-            isMensual ? "Ir a Prácticas y Exámenes" : "Obtener por 9€/mes",
-            "9€/mes",
-            `<ul>
-                <li>Accede y aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
-                con contenido práctico y estructurado.</li>
-                <li>Prepárate para los exámenes de certificaciones Power Platform Fundamentals (PL900), 
-                Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
-            </ul>`,
-            `<p>Formación práctica y exámenes:</p>
-            <ul>
-                <li>Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
-                encontrarás contenido práctico y estructurado.</li>
-                <li>También tendrás acceso preparaciones de exámenes de certificaciones Power Platform Fundamentals (PL900), 
-                Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
-            </ul>`
-        );
+// **Prácticas y Exámenes Block**
+createFeatureBlock(
+    "Prácticas y Exámenes",
+    "proMensual",
+    isMensual,
+    () => window.location.href = isMensual ? "practicas.html" : "payment.html",
+    isMensual ? "Ir a Prácticas y Exámenes" : "Obtener por 9€/mes",
+    "9€/mes",
+    `<ul>
+        <li>Accede y aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
+        con contenido práctico y estructurado.</li>
+        <li>Prepárate para los exámenes de certificaciones Power Platform Fundamentals (PL900), 
+        Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
+    </ul>`,
+    `<p>Formación práctica y exámenes:</p>
+    <ul>
+        <li>Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
+        encontrarás contenido práctico y estructurado.</li>
+        <li>También tendrás acceso preparaciones de exámenes de certificaciones Power Platform Fundamentals (PL900), 
+        Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
+    </ul>`
+);
 
-        // **Club de los Viernes Block**
-        createFeatureBlock(
-            "Club de los Viernes",
-            "clubBlock",
-            isTrimestral,
-            () => window.open(isTrimestral ? "https://teams.microsoft.com" : "payment.html", "_blank"),
-            isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
-            "24,30€/trimestre",
-            `<ul>
-            Accede al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.
-            </ul>
-           <p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
+// **Club de los Viernes Block**
+createFeatureBlock(
+    "Club de los Viernes",
+    "clubBlock",
+    isTrimestral,
+    () => window.open(isTrimestral 
+        ? "https://teams.microsoft.com/l/meetup-join/19%3ameeting_ZTYxNzc4MjgtMmYzYS00ZjViLTlkYjMtMmIyNDFiNGU3OWVl%40thread.v2/0?context=%7b%22Tid%22%3a%22d6f3c3a3-bf18-42da-aab1-74d2e659e789%22%2c%22Oid%22%3a%2214bd5277-2ed9-40f3-b75a-eb08ae5d2b5c%22%7d" 
+        : "payment.html", "_blank"),
+    isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
+    "24,30€/trimestre",
+    `<ul>
+    Accede al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.
+    </ul>
+   <p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
 <div style="display: flex; justify-content: center; gap: 30px;">
     <ul style="list-style: none; padding: 0;">
         <li>🇲🇽 México DF: 09:00</li>
@@ -223,45 +225,44 @@
         <li>🇨🇱 Santiago: 12:00</li>
         <li>🇪🇸 Madrid: 16:00</li>
     </ul>`,
-            `<ul>
-    <li>Descuento del 10%</li>
-    <li>Acceso a prácticas y preparación de exámenes.</li>
-    <li>Acceso al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.</li>
-</ul>
-
-<p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
-
-<div style="display: flex; justify-content: center; gap: 30px;">
-    <ul style="list-style: none; padding: 0;">
-        <li>🇲🇽 México DF: 09:00</li>
-        <li>🇨🇴 Bogotá: 10:00</li>
-        <li>🇵🇪 Lima: 10:00</li>
+    `<ul>
+        <li>Descuento del 10%</li>
+        <li>Acceso a prácticas y preparación de exámenes.</li>
+        <li>Acceso al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.</li>
     </ul>
-    <ul style="list-style: none; padding: 0;">
-        <li>🇦🇷 Buenos Aires: 12:00</li>
-        <li>🇨🇱 Santiago: 12:00</li>
-        <li>🇪🇸 Madrid: 16:00</li>
-    </ul>`
-        );
+    <p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
+    <div style="display: flex; justify-content: center; gap: 30px;">
+        <ul style="list-style: none; padding: 0;">
+            <li>🇲🇽 México DF: 09:00</li>
+            <li>🇨🇴 Bogotá: 10:00</li>
+            <li>🇵🇪 Lima: 10:00</li>
+        </ul>
+        <ul style="list-style: none; padding: 0;">
+            <li>🇦🇷 Buenos Aires: 12:00</li>
+            <li>🇨🇱 Santiago: 12:00</li>
+            <li>🇪🇸 Madrid: 16:00</li>
+        </ul>`
+);
 
-        // **Consultas Directas Block**
-        createFeatureBlock(
-            "Consultas Directas",
-            "consultasBlock",
-            isAnual,
-            () => window.open(isAnual ? "mailto:support@cepacode.com" : "payment.html", "_blank"),
-            isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
-            "75,60€/año",
-            `<p>¡Aquí lo tienes!</p>
-            <p>Te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</p>`,
-            `<ul>
-                <li>Descuento del 25%.</li>
-                <li>Acceso a prácticas y exámenes.</li>
-                <li>Acceso al Club de los Viernes.</li>
-                <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</li>               
-            </ul>`
-        );
-    });
+// **Consultas Directas Block**
+createFeatureBlock(
+    "Consultas Directas",
+    "consultasBlock",
+    isAnual,
+    () => window.open(isAnual 
+        ? "https://wa.me/34623958609" 
+        : "payment.html", "_blank"),
+    isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
+    "75,60€/año",
+    `<p>¡Aquí lo tienes!</p>
+    <p>Te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</p>`,
+    `<ul>
+        <li>Descuento del 25%.</li>
+        <li>Acceso a prácticas y exámenes.</li>
+        <li>Acceso al Club de los Viernes.</li>
+        <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k.</li>               
+    </ul>`
+);
 
     function logout() {
         localStorage.removeItem("user");
