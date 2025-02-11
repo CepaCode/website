@@ -29,8 +29,8 @@
         /* Subscription Container */
         .container-flex {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
             padding: 40px 0;
             flex: 1;
@@ -38,7 +38,7 @@
 
         /* Subscription Block */
         .subscription-block {
-            width: 360px;
+            width: 45%; /* Two blocks per row */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -55,6 +55,13 @@
             font-weight: bold;
             text-align: center;
             line-height: 1.2;
+        }
+
+        .subscription-block h4 {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0171E3;
+            margin-bottom: 10px;
         }
 
         /* Plan Description */
@@ -133,6 +140,13 @@
             margin-top: auto;
         }
 
+        /* Responsive Fix */
+        @media (max-width: 768px) {
+            .subscription-block {
+                width: 90%; /* Stack blocks in one column on mobile */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -160,13 +174,15 @@
 
     <!-- CepaCode Basic -->
     <div class="subscription-block">
-        <h3>CepaCode Basic - 0€/mes</h3>
+        <h3>CepaCode Basic</h3>
+        <h4>0€/mes</h4>
         <p class="plan-description">Accede a contenido gratuito en YouTube y recibe nuestra newsletter mensual con novedades sobre Power Platform.</p>
     </div>
 
     <!-- Mensual -->
     <div class="subscription-block">
-        <h3>CepaCode Pro Mensual - 9€/mes</h3>
+        <h3>CepaCode Pro Mensual</h3>
+        <h4>9€/mes</h4>
         <p class="plan-description">Formación progresiva sobre Power Platform con acceso a todos los cursos y preparación para certificaciones PL900, PL200 y PL600.</p>
         <div class="button-wrapper">
             <a href="checkout.html?plan=mensual" class="button-blue">Suscribirme</a>
@@ -176,8 +192,18 @@
 
     <!-- Trimestral -->
     <div class="subscription-block">
-        <h3>CepaCode Pro Trimestral - 24,30€/Trimestre</h3>
+        <h3>CepaCode Pro Trimestral</h3>
+        <h4>24,30€/Trimestre</h4>
         <p class="plan-description">Accede a todo el contenido de CepaCode Pro Mensual con un 10% de descuento. Incluye acceso al Club de los Viernes.</p>
+        <p class="plan-description">
+            🕒 <b>Horarios del Club de los Viernes:</b><br>
+            🇲🇽 México DF: 09:00 <br>
+            🇨🇴 Bogotá: 10:00 <br>
+            🇵🇪 Lima: 10:00 <br>
+            🇦🇷 Buenos Aires: 12:00 <br>
+            🇨🇱 Santiago: 12:00 <br>
+            🇪🇸 Madrid: 16:00 <br>
+        </p>
         <div class="button-wrapper">
             <a href="checkout.html?plan=trimestral" class="button-blue">Suscribirme</a>
             <a href="checkout_paypal.html?plan=trimestral" class="button-blue">PayPal</a>
@@ -186,7 +212,8 @@
 
     <!-- Anual -->
     <div class="subscription-block">
-        <h3>CepaCode Pro Anual - 75,60€/Año</h3>
+        <h3>CepaCode Pro Anual</h3>
+        <h4>75,60€/Año</h4>
         <p class="plan-description">Accede a todo el contenido con un 25% de descuento y obtén consultas directas por WhatsApp.</p>
         <div class="button-wrapper">
             <a href="checkout.html?plan=anual" class="button-blue">Suscribirme</a>
