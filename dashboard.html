@@ -9,18 +9,18 @@
         .btn-blue { background: linear-gradient(135deg, #0171E3, #00B4DB); color: white; }
         .btn-green { background: linear-gradient(135deg, #28A745, #34D058); color: white; }
         .subscription-block {
-            background-color: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 360px; 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 260px; /* Adjusted height to ensure space for button */
-        }
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensures responsiveness */
+    min-height: 280px; /* Ensures all blocks have equal height */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes button to bottom */
+    align-items: center;
+}
         .subscription-block h3 {
             margin-bottom: 15px;
             display: flex;
@@ -34,18 +34,19 @@
             margin-bottom: 15px;
         }
         .btn-block-custom {
-            display: inline-block; 
-            width: 220px; 
-            padding: 10px;
-            font-size: 16px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            margin-top: auto; /* Pushes button to the bottom */
-            margin-bottom: 5px; /* Ensures 5px spacing from bottom */
-        }
+    display: inline-block; 
+    width: 220px; /* Consistent button width */
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: auto; /* Pushes button to bottom */
+    margin-bottom: 5px; /* Ensures 5px spacing from bottom */
+    text-align: center; /* Centers text inside */
+}
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
         .icon-img {
@@ -54,15 +55,15 @@
             margin-left: 10px;
         }
         #featuresContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center; /* Ensures horizontal centering */
-    align-items: center; /* Ensures vertical centering */
-    gap: 20px; /* Space between blocks */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Creates a responsive grid */
+    gap: 20px; /* Ensures equal spacing between blocks */
+    justify-content: center; /* Centers the grid */
+    align-items: start; /* Aligns items evenly at the top */
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto; /* Centers the container */
-    text-align: center; /* Ensures text inside is aligned */
+    margin: 0 auto; /* Centers the entire container */
+    text-align: center; /* Ensures text inside is centered */
 }
     </style>
 </head>
