@@ -15,7 +15,11 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 360px; /* Match signin.html block width */
+            width: 360px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 260px; /* Adjusted height to ensure space for button */
         }
         .subscription-block h3 {
             margin-bottom: 15px;
@@ -30,7 +34,7 @@
             margin-bottom: 15px;
         }
         .btn-block-custom {
-            display: inline-block; /* Shorter buttons */
+            display: inline-block; 
             width: 220px; 
             padding: 10px;
             font-size: 16px;
@@ -39,6 +43,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: auto; /* Pushes button to the bottom */
+            margin-bottom: 5px; /* Ensures 5px spacing from bottom */
         }
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
@@ -47,7 +53,6 @@
             height: 35px;
             margin-left: 10px;
         }
-        /* Center blocks */
         #featuresContainer {
             display: flex;
             flex-wrap: wrap;
@@ -115,7 +120,6 @@
             block.classList.add("subscription-block");
 
             const heading = document.createElement("h3");
-
             const titleText = document.createTextNode(title);
             heading.appendChild(titleText);
 
@@ -169,7 +173,7 @@
         // ✅ Club de los Viernes (With Teams Icon)
         createFeatureBlock(
             "Acceder al Club de los Viernes",
-            `Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform.`,
+            "Establece una conexión semanal en directo conmigo y con otros compañeros y expertos de la comunidad Power Platform.",
             "clubBlock",
             subscription === "mensual" ? "btn-green" : "btn-blue",
             () => {
