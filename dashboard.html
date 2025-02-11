@@ -39,7 +39,8 @@
     -webkit-background-clip: text;
     color: transparent;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 10px;
+    margin-top: 24px; /* Ensures price is always 24px below the title */
+    margin-bottom: 10px; /* Keeps a small gap before the description */
 }
         .btn-block-custom {
             width: 280px;
@@ -56,7 +57,9 @@
         }
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
+        @media (max-width: 768px) {
         #featuresContainer {
+            grid-template-columns: 1fr; /* Single column layout on small screens */
             display: grid;
             grid-template-columns: repeat(2, minmax(350px, 1fr));
             gap: 20px;
@@ -66,6 +69,7 @@
             max-width: 1200px;
             margin: 0 auto;
             text-align: center;
+            
         }
     </style>
 </head>
