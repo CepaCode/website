@@ -16,7 +16,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             width: 100%;
             min-height: 300px;
-            height: 550px; /* Fixed height */
+            height: 430px; /* Fixed height */
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -40,6 +40,8 @@
     color: transparent;
     -webkit-text-fill-color: transparent;
     margin-bottom: 10px;
+    margin-top: 24px; /* Ensures price is always 24px below the title */
+    margin-bottom: 10px; /* Keeps a small gap before the description */
 }
         .btn-block-custom {
             width: 280px;
@@ -202,21 +204,25 @@
                 <li>🇨🇱 Santiago: 12:00</li>
                 <li>🇪🇸 Madrid: 16:00</li>
             </ul>`,
-            `<ul>
-                <li>Descuento del 10%</li>
-                <li>Acceso a prácticas.</li>
-                <li>Acceso a preparación de exámenes.</li>
-                <li>Acceso al Club de los Viernes, donde tendremos sesiones en directo con otros estudiantes y expertos de Power Platform y donde podrás hacer tus preguntas y consultar dudas.</li>
-            </ul>
-            <p>🕒 Horarios del Club de los Viernes:</p>
-            <ul>
-                <li>🇲🇽 México DF: 09:00</li>
-                <li>🇨🇴 Bogotá: 10:00</li>
-                <li>🇵🇪 Lima: 10:00</li>
-                <li>🇦🇷 Buenos Aires: 12:00</li>
-                <li>🇨🇱 Santiago: 12:00</li>
-                <li>🇪🇸 Madrid: 16:00</li>
-            </ul>`
+            `ul>
+    <li>Descuento del 10%</li>
+    <li>Acceso a prácticas y preparación de exámenes.</li>
+    <li>Acceso al Club de los Viernes, donde haremos una sesión en directo todos para poner temas en común y aprender juntos.</li>
+</ul>
+
+<p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
+
+<div style="display: flex; justify-content: center; gap: 30px;">
+    <ul style="list-style: none; padding: 0;">
+        <li>🇲🇽 México DF: 09:00</li>
+        <li>🇨🇴 Bogotá: 10:00</li>
+        <li>🇵🇪 Lima: 10:00</li>
+    </ul>
+    <ul style="list-style: none; padding: 0;">
+        <li>🇦🇷 Buenos Aires: 12:00</li>
+        <li>🇨🇱 Santiago: 12:00</li>
+        <li>🇪🇸 Madrid: 16:00</li>
+    </ul>`
         );
 
         // **Consultas Directas Block**
@@ -231,8 +237,7 @@
             <p>¡Pregúntame lo que quieras!</p>`,
             `<ul>
                 <li>Descuento del 25%.</li>
-                <li>Acceso a prácticas.</li>
-                <li>Acceso a exámenes.</li>
+                <li>Acceso a prácticas y exámenes.</li>
                 <li>Acceso al Club de los Viernes.</li>
                 <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que da error y no sabes por qué, preguntas sobre cómo afrontar los exámenes de certificación,Cómo mejorar tu carrera profesional y llegar a obtener salarios de 30k, 40k o 50k.</li>               
             </ul>`
