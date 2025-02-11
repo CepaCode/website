@@ -103,8 +103,8 @@
             
             const priceTag = document.createElement("p");
             priceTag.classList.add("block-subtitle");
-            priceTag.innerHTML = hasAccess ? "Tienes acceso" : price;
-            
+            priceTag.innerHTML = hasAccess ? "" : price; // If hasAccess is true, show nothing
+
             const desc = document.createElement("p");
             desc.classList.add("block-subtitle");
             desc.innerHTML = description;
@@ -116,7 +116,7 @@
             button.onclick = onClickHandler;
 
             block.appendChild(heading);
-            block.appendChild(priceTag);
+            if (!hasAccess) block.appendChild(priceTag); // Append only if price should be shown
             block.appendChild(desc);
             block.appendChild(button);
             featuresContainer.appendChild(block);
@@ -129,25 +129,24 @@
 
         createFeatureBlock(
             "YouTube & Newsletter",
-            "Accede a contenido gratuito en YouTube y recibe nuestra newsletter.",
+            "Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.",
             "basicBlock",
             true,
             () => window.open("https://youtube.com", "_blank"),
             "YouTube",
             "",
-            "Newsletter mensual sobre Power Platform."
+            "Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí."
         );
 
         createFeatureBlock(
             "Prácticas y Exámenes",
-            "Formación práctica y preparación para certificaciones.",
+            "Practica Power Platform conmigo, para todos los niveles. ¡Accede ya!"<br>" Preparación de exámenes para PL900, PL200 y PL600. ¡Prepárate y certifícate con éxito!",
             "proMensual",
             isMensual,
             () => window.location.href = isMensual ? "practicas.html" : "payment.html",
             isMensual ? "Ir a Prácticas" : "Obtener por 9€/mes",
             "9€/mes",
-            "Aprende sobre Power Platform con cursos estructurados."
-        );
+           "Formación práctica y exámenes:" <br>"Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o eres un desarrollador avanzado, encontrarás horas y horas de contenido práctico y estructurado que te convertirán en un gran desarrollador de Power Apps y Power Automate." <br>"También tendrás acceso a las preparaciones para los exámenes de las certificaciones Power Platform Fundamentals (PL900), Power Platform Functional Consultant (PL200) y  hasta la de más alto nivel, la certificación Power Platform Solutions Architect (PL600).");
 
         createFeatureBlock(
             "Club de los Viernes",
@@ -157,7 +156,7 @@
             () => window.open(isTrimestral ? "https://teams.microsoft.com" : "payment.html", "_blank"),
             isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
             "24,30€/trimestre",
-            "Únete a nuestras reuniones semanales."
+            "Únete a nuestras reuniones todos los viernes:"<br>"🕒 Horarios del Club de los Viernes:"<br>"🇲🇽 México DF: 09:00"<br>"🇨🇴 Bogotá: 10:00"<br>"<br>"<br>"🇵🇪 Lima: 10:00"<br>"🇦🇷 Buenos Aires: 12:00"<br>"🇨🇱 Santiago: 12:00"<br>"🇪🇸 Madrid: 16:00"
         );
 
         createFeatureBlock(
