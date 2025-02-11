@@ -94,20 +94,20 @@
         const subscription = user.subscription ? user.subscription.toLowerCase() : "basic"; // Default to 'basic'
         const featuresContainer = document.getElementById("featuresContainer");
 
-        function createFeatureBlock(title, subtitle, id, hasAccess, onClickHandler, buttonText, price, description) {
+        function createFeatureBlock(title, id, hasAccess, onClickHandler, buttonText, price, descBlue, descGreen) {
             const block = document.createElement("div");
             block.classList.add("subscription-block");
-            
+
             const heading = document.createElement("h3");
             heading.textContent = title;
-            
+
             const priceTag = document.createElement("p");
             priceTag.classList.add("block-subtitle");
-            priceTag.innerHTML = hasAccess ? "" : price; // If hasAccess is true, show nothing
+            priceTag.innerHTML = hasAccess ? "" : price; // Only show price if it's a green button
 
-            const desc = document.createElement("p");
+            const desc = document.createElement("div");
             desc.classList.add("block-subtitle");
-            desc.innerHTML = description;
+            desc.innerHTML = hasAccess ? descBlue : descGreen; // Different descriptions for blue vs green
 
             const button = document.createElement("button");
             button.id = id;
@@ -116,7 +116,7 @@
             button.onclick = onClickHandler;
 
             block.appendChild(heading);
-            if (!hasAccess) block.appendChild(priceTag); // Append only if price should be shown
+            if (!hasAccess) block.appendChild(priceTag); // Show price only if access is not granted
             block.appendChild(desc);
             block.appendChild(button);
             featuresContainer.appendChild(block);
@@ -127,47 +127,102 @@
         const isTrimestral = subscription === "trimestral" || subscription === "anual";
         const isAnual = subscription === "anual";
 
+        // **YouTube & Newsletter Block (Always Blue)**
         createFeatureBlock(
             "YouTube & Newsletter",
-            "Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.",
             "basicBlock",
             true,
             () => window.open("https://youtube.com", "_blank"),
             "YouTube",
             "",
-            "Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí."
+            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
+            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`,
+            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
+            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`
         );
 
+        // **Prácticas y Exámenes Block**
         createFeatureBlock(
             "Prácticas y Exámenes",
-            "Practica Power Platform conmigo, para todos los niveles. ¡Accede ya!"<br>" Preparación de exámenes para PL900, PL200 y PL600. ¡Prepárate y certifícate con éxito!",
             "proMensual",
             isMensual,
             () => window.location.href = isMensual ? "practicas.html" : "payment.html",
             isMensual ? "Ir a Prácticas" : "Obtener por 9€/mes",
             "9€/mes",
-           "Formación práctica y exámenes:" <br>"Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o eres un desarrollador avanzado, encontrarás horas y horas de contenido práctico y estructurado que te convertirán en un gran desarrollador de Power Apps y Power Automate." <br>"También tendrás acceso a las preparaciones para los exámenes de las certificaciones Power Platform Fundamentals (PL900), Power Platform Functional Consultant (PL200) y  hasta la de más alto nivel, la certificación Power Platform Solutions Architect (PL600).");
+            `<ul>
+                <li>Practica Power Platform conmigo, para todos los niveles. ¡Accede ya!</li>
+                <li>Preparación de exámenes para PL900, PL200 y PL600. ¡Prepárate y certifícate con éxito!</li>
+            </ul>`,
+            `<p>Formación práctica y exámenes:</p>
+            <ul>
+                <li>Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o eres un desarrollador avanzado, 
+                encontrarás horas y horas de contenido práctico y estructurado que te convertirán en un gran desarrollador de Power Apps y Power Automate.</li>
+                <li>También tendrás acceso a las preparaciones para los exámenes de las certificaciones Power Platform Fundamentals (PL900), 
+                Power Platform Functional Consultant (PL200) y hasta la de más alto nivel, la certificación Power Platform Solutions Architect (PL600).</li>
+            </ul>`
+        );
 
+        // **Club de los Viernes Block**
         createFeatureBlock(
             "Club de los Viernes",
-            "Sesiones en directo con la comunidad Power Platform.",
             "clubBlock",
             isTrimestral,
             () => window.open(isTrimestral ? "https://teams.microsoft.com" : "payment.html", "_blank"),
             isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
             "24,30€/trimestre",
-            "Únete a nuestras reuniones todos los viernes:"<br>"🕒 Horarios del Club de los Viernes:"<br>"🇲🇽 México DF: 09:00"<br>"🇨🇴 Bogotá: 10:00"<br>"<br>"<br>"🇵🇪 Lima: 10:00"<br>"🇦🇷 Buenos Aires: 12:00"<br>"🇨🇱 Santiago: 12:00"<br>"🇪🇸 Madrid: 16:00"
+            `<ul>
+                <li>Únete a nuestras reuniones todos los viernes:</li>
+            </ul>
+            <p>🕒 Horarios del Club de los Viernes:</p>
+            <ul>
+                <li>🇲🇽 México DF: 09:00</li>
+                <li>🇨🇴 Bogotá: 10:00</li>
+                <li>🇵🇪 Lima: 10:00</li>
+                <li>🇦🇷 Buenos Aires: 12:00</li>
+                <li>🇨🇱 Santiago: 12:00</li>
+                <li>🇪🇸 Madrid: 16:00</li>
+            </ul>`,
+            `<ul>
+                <li>Descuento del 10%</li>
+                <li>Acceso a prácticas.</li>
+                <li>Acceso a preparación de exámenes.</li>
+                <li>Acceso al Club de los Viernes, donde tendremos sesiones en directo con otros estudiantes y expertos de Power Platform y donde podrás hacer tus preguntas y consultar dudas.</li>
+            </ul>
+            <p>🕒 Horarios del Club de los Viernes:</p>
+            <ul>
+                <li>🇲🇽 México DF: 09:00</li>
+                <li>🇨🇴 Bogotá: 10:00</li>
+                <li>🇵🇪 Lima: 10:00</li>
+                <li>🇦🇷 Buenos Aires: 12:00</li>
+                <li>🇨🇱 Santiago: 12:00</li>
+                <li>🇪🇸 Madrid: 16:00</li>
+            </ul>`
         );
 
+        // **Consultas Directas Block**
         createFeatureBlock(
             "Consultas Directas",
-            "Soporte personal en Power Platform.",
             "consultasBlock",
             isAnual,
             () => window.open(isAnual ? "mailto:support@cepacode.com" : "payment.html", "_blank"),
             isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
             "75,60€/año",
-            "¡Pregúntame lo que quieras!"
+            `<p>¿A qué esperas?</p>
+            <p>¡Pregúntame lo que quieras!</p>`,
+            `<ul>
+                <li>Descuento del 25%.</li>
+                <li>Acceso a prácticas.</li>
+                <li>Acceso a exámenes.</li>
+                <li>Acceso al Club de los Viernes.</li>
+                <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform:
+                    <ul>
+                        <li>Una funcionalidad de Power Apps que no terminas de dominar.</li>
+                        <li>Algo en Power Automate que da error y no sabes por qué.</li>
+                        <li>Preguntas sobre cómo afrontar los exámenes de certificación.</li>
+                        <li>Cómo mejorar tu carrera profesional y llegar a obtener salarios de 30k, 40k o 50k.</li>
+                    </ul>
+                </li>
+            </ul>`
         );
     });
 
