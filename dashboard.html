@@ -31,8 +31,18 @@
             margin-bottom: 10px;
             text-align: left; /* Ensure bullet points are left-aligned */
         }
+        .price-text {
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(135deg, #28A745, #34D058);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
         .btn-block-custom {
-            width: 220px;
+            width: 280px;
             padding: 10px;
             font-size: 16px;
             border-radius: 8px;
@@ -42,6 +52,7 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             margin-bottom: 5px;
             text-align: center;
+            
         }
         .btn-blue:hover { background: linear-gradient(135deg, #00B4DB, #0171E3); }
         .btn-green:hover { background: linear-gradient(135deg, #34D058, #28A745); }
@@ -104,7 +115,7 @@
             heading.textContent = title;
 
             const priceTag = document.createElement("p");
-            priceTag.classList.add("block-subtitle");
+            priceTag.classList.add("price-text");
             priceTag.innerHTML = hasAccess ? "" : price; // Only show price if it's a green button
 
             const desc = document.createElement("div");
