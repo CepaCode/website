@@ -56,14 +56,15 @@
         }
         #featuresContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Creates a responsive grid */
-    gap: 20px; /* Ensures equal spacing between blocks */
+    grid-template-columns: repeat(2, minmax(350px, 1fr)); /* Forces 2 columns */
+    grid-template-rows: repeat(2, auto); /* Forces 2 rows */
+    gap: 20px; /* Adds consistent spacing */
     justify-content: center; /* Centers the grid */
-    align-items: start; /* Aligns items evenly at the top */
+    align-items: start; /* Ensures all items align evenly */
     width: 100%;
     max-width: 1200px;
     margin: 0 auto; /* Centers the entire container */
-    text-align: center; /* Ensures text inside is centered */
+    text-align: center; /* Centers text inside */
 }
     </style>
 </head>
