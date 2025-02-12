@@ -182,7 +182,7 @@
             "Prácticas y Exámenes",
             "proMensual",
             isMensual,
-            () => window.location.href = isMensual ? "practicas.html" : "payment.html",
+            () => window.location.href = isMensual ? "practicas.html" : "stripe.html",
             isMensual ? "Ir a Prácticas y Exámenes" : "Obtener por 9€/mes",
             "9€/mes",
             `<ul>
@@ -205,7 +205,7 @@
             "Club de los Viernes",
             "clubBlock",
             isTrimestral,
-            () => window.open(isTrimestral ? "https://teams.microsoft.com" : "payment.html", "_blank"),
+            () => window.open(isTrimestral ? "https://teams.microsoft.com" : "stripe.html", "_blank"),
             isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
             "24,30€/trimestre",
             `<ul>
@@ -249,7 +249,7 @@
             "Consultas Directas",
             "consultasBlock",
             isAnual,
-            () => window.open(isAnual ? "https://wa.me/34623958609" : "payment.html", "_blank"),
+            () => window.open(isAnual ? "https://wa.me/34623958609" : "stripe.html", "_blank"),
             isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
             "75,60€/año",
             `<p>¡Aquí lo tienes!</p>
