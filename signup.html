@@ -225,12 +225,45 @@
 
 <!-- Scripts -->
 <script>
-document.getElementById("signupForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
-    alert("Registrado. Ahora puedes iniciar sesión.");
-    window.location.href = "signin.html";
-});
-</script>
+    document.getElementById("signupForm").addEventListener("submit", async function(event) {
+        event.preventDefault();
+    
+        const fullname = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+    
+        // Regular expression to enforce password rules (8-16 characters, at least one letter and one number)
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,16}$/;
+    
+        if (!passwordRegex.test(password)) {
+            alert("La contraseña debe tener entre 8 y 16 caracteres, incluyendo al menos una letra y un número.");
+            return;
+        }
+    
+        if (password !== confirmPassword) {
+            alert("Las contraseñas no coinciden.");
+            return;
+        }
+    
+        const hashedPassword = btoa(password); // Encode password
+    
+        const data = {
+            fullname: fullname,
+            ncs_email: email,
+            ncs_password: hashedPassword
+        };
+    
+        try {
+            // Simulating a successful sign-up flow
+            alert("Registrado correctamente. Ahora puedes iniciar sesión.");
+            window.location.href = "signin.html";
+        } catch (error) {
+            console.error("Error:", error);
+            alert("Hubo un problema de conexión.");
+        }
+    });
+    </script>
 
 </body>
 </html>
