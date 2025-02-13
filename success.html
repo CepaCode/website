@@ -49,7 +49,7 @@
     <div class="container">
         <h2>¡Gracias por suscribirte!</h2>
         <p class="subtitle">Desde tu Área Privada, tienes acceso al mejor contenido exclusivo.</p>
-        <a href="dashboard.html" class="btn"  id="goToDashboard">Ir a Mi Área Privada</a>
+        <a href="dashboard.html" class="btn"  id="goToSignin">Ir a Mi Área Privada</a>
     </div>
 
     <script>
@@ -79,21 +79,24 @@
                         subscription: data.subscription
                     }));
                     localStorage.setItem("refreshSubscription", "true"); // Flag for dashboard refresh
+                    
+                    // ✅ Redirect after 3 seconds
+                    setTimeout(() => {
+                        window.location.href = "signin.html";
+                    }, 3000);
+                    
                 } else {
                     alert("Hubo un problema al actualizar tu suscripción.");
                 }
     
             } catch (error) {
                 console.error("Error en la actualización:", error);
+                alert("Error al conectar con el servidor.");
             }
-    
-            // Redirect user to signin.html after 5 seconds
-            setTimeout(() => {
-                window.location.href = "signin.html";
-            }, 5000);
         });
     
-        document.getElementById("goToSignin").addEventListener("click", function () {
+        // ✅ Fix button event
+        document.getElementById("goToDashboard").addEventListener("click", function () {
             window.location.href = "signin.html";
         });
     </script>
