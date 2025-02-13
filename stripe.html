@@ -11,6 +11,7 @@
     <script>
     document.addEventListener("DOMContentLoaded", async function () {
     const productId = localStorage.getItem("selectedProduct");
+    
     if (!productId) {
         alert("No se encontró el producto seleccionado.");
         window.location.href = "dashboard.html";
@@ -18,38 +19,41 @@
     }
 
     try {
-        console.log("Sending request to Power Automate with productId:", productId);
+        console.log("🟢 Sending request to Power Automate with productId:", productId);
         const response = await fetch("https://prod-155.westeurope.logic.azure.com:443/workflows/e06c2498751247f8b5e011f7e060a222/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=XM4Exb1UPCXlhEOzu9nlUBF84f4dHnT5NJpMBMEGrTY", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ priceId: productId }) // Change productId to priceId
+            body: JSON.stringify({ priceId: productId })
         });
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.error("HTTP Error:", errorText);
+            console.error("❌ HTTP Error:", errorText);
             alert(`Error al procesar el pago: ${errorText}`);
             window.location.href = "dashboard.html";
             return;
         }
 
+        // ✅ Ensure JSON is correctly parsed
         const data = await response.json();
-        console.log("Response from Power Automate:", data); // Debugging
+        console.log("🟢 Full Response from Power Automate:", JSON.stringify(data, null, 2)); // Debugging
 
-        const checkoutUrl = data?.body?.inputs?.body?.checkoutUrl; // Ensure we get the correct value
+        // ✅ Extracting checkoutUrl
+        const checkoutUrl = data?.body?.inputs?.body?.checkoutUrl;
+        console.log("🟢 Extracted checkoutUrl:", checkoutUrl);
 
         if (checkoutUrl) {
-            console.log("Redirecting to:", checkoutUrl);
+            console.log("🔄 Redirecting to:", checkoutUrl);
             window.location.href = checkoutUrl;
         } else {
-            console.error("checkoutUrl is missing from response!", data);
-            alert("Error al procesar el pago.");
+            console.error("❌ checkoutUrl is missing from response!", data);
+            alert("Error al procesar el pago. No se encontró checkoutUrl.");
             window.location.href = "dashboard.html";
         }
     } catch (error) {
-        console.error("Error:", error);
+        console.error("❌ Error:", error);
         alert("Error de conexión o problema con la API.");
         window.location.href = "dashboard.html";
     }
