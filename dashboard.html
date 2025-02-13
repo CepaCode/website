@@ -182,7 +182,14 @@
             "Prácticas y Exámenes",
             "proMensual",
             isMensual,
-            () => window.location.href = isMensual ? "practicas.html" : "stripe.html",
+            () => {
+                    if (!isMensual) {
+                        localStorage.setItem("selectedProduct", "price_1Qrm5TJh0lZg4NYPzvMZ6Fdg");
+                        window.location.href = "stripe.html";
+                    } else {
+                        window.location.href = "practicas.html";
+                    }
+                },
             isMensual ? "Ir a Prácticas y Exámenes" : "Obtener por 9€/mes",
             "9€/mes",
             `<ul>
@@ -205,7 +212,14 @@
             "Club de los Viernes",
             "clubBlock",
             isTrimestral,
-            () => window.open(isTrimestral ? "https://teams.microsoft.com" : "stripe.html", "_blank"),
+            () => {
+    if (!isTrimestral) {
+        localStorage.setItem("selectedProduct", "price_1Qrm7oJh0lZg4NYPrCIbP11y");
+        window.location.href = "stripe.html";
+    } else {
+        window.open("https://teams.microsoft.com", "_blank");
+    }
+},
             isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
             "24,30€/trimestre",
             `<ul>
@@ -249,7 +263,14 @@
             "Consultas Directas",
             "consultasBlock",
             isAnual,
-            () => window.open(isAnual ? "https://wa.me/message/E3GICSKLY2HKM1" : "stripe.html", "_blank"),
+            () => {
+    if (!isAnual) {
+        localStorage.setItem("selectedProduct", "price_1Qrm82Jh0lZg4NYPXd1ajGKG");
+        window.location.href = "stripe.html";
+    } else {
+        window.open("https://wa.me/message/E3GICSKLY2HKM1", "_blank");
+    }
+},
             isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
             "75,60€/año",
             `<p>¡Aquí lo tienes!</p>
