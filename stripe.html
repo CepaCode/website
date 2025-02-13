@@ -41,7 +41,7 @@
         const data = await response.json();
         console.log("Response from Power Automate:", data); // Debugging
 
-        const checkoutUrl = data?.body?.checkoutUrl; // Ensure we get the correct value
+        const checkoutUrl = data?.body?.checkoutUrl || data?.inputs?.body?.checkoutUrl; // Ensure we get the correct value
 
         if (checkoutUrl) {
             console.log("Redirecting to:", checkoutUrl);
