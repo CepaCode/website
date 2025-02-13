@@ -228,6 +228,7 @@
                 alert("Has iniciado sesión.");
                 localStorage.setItem("user", JSON.stringify({
                     fullname: result.fullname, 
+                    email: email,  // ✅ Store email in localStorage
                     subscription: result.subscription
                 }));
                 window.location.href = "dashboard.html";
