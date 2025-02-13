@@ -48,10 +48,9 @@
 
     <div class="container">
         <h2>¡Gracias por suscribirte!</h2>
-        <p class="subtitle">Desde tu Área Privada, tienes acceso al mejor contenido exclusivo.</p>
-        <a href="dashboard.html" class="btn"  id="goToSignin">Ir a Mi Área Privada</a>
+        <p class="subtitle">Inicia sesión para ir a tu Área Privada donde tendrás acceso al mejor contenido exclusivo.</p>
+        <a href="signin.html" class="btn"  id="goToSignin">Iniciar Sesión</a>
     </div>
-
     <script>
         document.addEventListener("DOMContentLoaded", async function () {
             const sessionId = new URLSearchParams(window.location.search).get("session_id");
@@ -78,9 +77,9 @@
                         ...JSON.parse(localStorage.getItem("user") || "{}"),
                         subscription: data.subscription
                     }));
-                    localStorage.setItem("refreshSubscription", "true"); // Flag for dashboard refresh
+                    localStorage.setItem("refreshSubscription", "true"); // Flag for refresh
                     
-                    // ✅ Redirect after 3 seconds
+                    // ✅ Redirect to signin.html after 3 seconds
                     setTimeout(() => {
                         window.location.href = "signin.html";
                     }, 3000);
@@ -95,11 +94,10 @@
             }
         });
     
-        // ✅ Fix button event
-        document.getElementById("goToDashboard").addEventListener("click", function () {
+        // ✅ Change button event to redirect to signin.html
+        document.getElementById("goToSignin").addEventListener("click", function () {
             window.location.href = "signin.html";
         });
     </script>
-
 </body>
 </html>
