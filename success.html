@@ -48,48 +48,54 @@
 
     <div class="container">
         <h2>¡Gracias por suscribirte!</h2>
-        <p class="subtitle">Inicia sesión y accede a tu Área Privada, donde ahora tienes acceso al mejor contenido exclusivo.</p>
-        <a href="signin.html" class="btn"  id="goTosignin">Ir a Inciar Sesión</a>
+        <p class="subtitle">Desde tu Área Privada, tienes acceso al mejor contenido exclusivo.</p>
+        <a href="dashboard.html" class="btn"  id="goToDashboard">Ir a Mi Área Privada</a>
     </div>
 
     <script>
-     document.addEventListener("DOMContentLoaded", async function () {
-    const sessionId = new URLSearchParams(window.location.search).get("session_id");
-    if (!sessionId) {
-        console.error("No se encontró session_id en la URL.");
-        return;
-    }
-
-    try {
-        const response = await fetch("https://prod-155.westeurope.logic.azure.com/tu-flow-actualiza-sub", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ session_id: sessionId })
+        document.addEventListener("DOMContentLoaded", async function () {
+            const sessionId = new URLSearchParams(window.location.search).get("session_id");
+            if (!sessionId) {
+                console.error("No se encontró session_id en la URL.");
+                return;
+            }
+    
+            try {
+                const response = await fetch("https://prod-155.westeurope.logic.azure.com/tu-flow-actualiza-sub", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ session_id: sessionId })
+                });
+    
+                const data = await response.json();
+                console.log("Actualización en Dataverse:", data);
+    
+                if (data.success && data.subscription) {
+                    // Store updated subscription in localStorage
+                    localStorage.setItem("user", JSON.stringify({
+                        ...JSON.parse(localStorage.getItem("user") || "{}"),
+                        subscription: data.subscription
+                    }));
+                    localStorage.setItem("refreshSubscription", "true"); // Flag for dashboard refresh
+                } else {
+                    alert("Hubo un problema al actualizar tu suscripción.");
+                }
+    
+            } catch (error) {
+                console.error("Error en la actualización:", error);
+            }
+    
+            // Redirect user to signin.html after 5 seconds
+            setTimeout(() => {
+                window.location.href = "signin.html";
+            }, 5000);
         });
-
-        const data = await response.json();
-        console.log("Actualización en Dataverse:", data);
-
-        if (data.success && data.subscription) {
-            // Store updated subscription in localStorage
-            localStorage.setItem("user", JSON.stringify({
-                ...JSON.parse(localStorage.getItem("user") || "{}"),
-                subscription: data.subscription
-            }));
-            localStorage.setItem("refreshSubscription", "true"); // Flag for signin refresh
-        } else {
-            alert("Hubo un problema al actualizar tu suscripción.");
-        }
-
-    } catch (error) {
-        console.error("Error en la actualización:", error);
-    }
-});
-document.getElementById("goTosignin").addEventListener("click", function () {
-    localStorage.setItem("refreshSubscription", "true"); // Ensure signin refreshes subscription
-});
+    
+        document.getElementById("goToSignin").addEventListener("click", function () {
+            window.location.href = "signin.html";
+        });
     </script>
 
 </body>
