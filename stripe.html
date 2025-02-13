@@ -41,7 +41,7 @@
         console.log("🟢 Full Response from Power Automate:", JSON.stringify(data, null, 2)); // Debugging
 
         // ✅ Extracting checkoutUrl
-        const checkoutUrl = data?.body?.inputs?.body?.checkoutUrl;
+        const checkoutUrl = data.inputs.body.checkoutUrl;
         console.log("🟢 Extracted checkoutUrl:", checkoutUrl);
 
         if (checkoutUrl) {
