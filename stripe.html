@@ -24,12 +24,16 @@
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ priceId: productId }) // Change productId to priceId
+            body: JSON.stringify({ productId: productId }) // Change productId to priceId
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+            const errorText = await response.text();
+    console.error("HTTP Error:", errorText);
+    alert(`Error al procesar el pago: ${errorText}`);
+    window.location.href = "dashboard.html";
+    return;
+}
 
         const data = await response.json();
         console.log("Response from Power Automate:", data);
