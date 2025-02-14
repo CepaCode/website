@@ -155,8 +155,11 @@ if (!token) {
   })
 });
 
-    const data = await response.json();
-    console.log("Updated subscription from Dataverse:", data);
+if (!tokenValidationResponse.ok) {
+    throw new Error(`Error en la validación del token: ${tokenValidationResponse.status}`);
+}
+
+const data = await tokenValidationResponse.json();    console.log("Updated subscription from Dataverse:", data);
 
     // Step 2: Validate subscription before allowing access
     if (!data.subscription || data.subscription === "basic") {
