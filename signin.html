@@ -226,10 +226,20 @@
             console.log("API Response:", result);
 
             if (response.ok && result.status === "success") {
-                alert("Has iniciado sesión.");
+    // Instead of just alerting the login, receive the token:
+    const token = result.token; // Ensure your flow returns this
+    // Save token securely (preferably in an HTTP-only cookie on the server side)
+    localStorage.setItem("sessionToken", token); // Only if you have no alternative
+
+    // Continue to fetch subscription data, store user info, etc.
+    // Redirect to dashboard
+    window.location.href = "dashboard.html";
+} else {
+    alert("Correo o contraseña incorrectos.");
+}
 
                 // **Fetch latest subscription from Dataverse**
-                const subscriptionResponse = await fetch("https://prod-155.westeurope.logic.azure.com/tu-flow-get-user-sub", {
+                const subscriptionResponse = await fetch("https://prod-163.westeurope.logic.azure.com:443/workflows/296b7198aac94a63a916d14860e7c75b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vQWfcinuPGvS4mD8puvcm-sDd-haB2pd8lSowzrxrwg", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email: email }) // Send email to retrieve latest subscription
