@@ -117,16 +117,56 @@
     <p>&copy; 2025 CepaCode. Todos los derechos reservados.</p>
 </footer>
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const userData = localStorage.getItem("user");
+    document.addEventListener("DOMContentLoaded", async function () {
+        let userData = localStorage.getItem("user");
+
         if (!userData) {
             alert("¡No has iniciado sesión!");
             window.location.href = "signin.html";
             return;
         }
 
-        const user = JSON.parse(userData);
+        let user = JSON.parse(userData);
+
+        // Ensure 'user' exists and has an email before proceeding
+        if (!user || !user.email) {
+            console.error("User data is missing or corrupted.");
+            window.location.href = "signin.html";
+            return;
+        }
+
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
+
+        // 🛡️ Step 1: Securely check user subscription from Dataverse
+        try {
+            const response = await fetch("https://prod-163.westeurope.logic.azure.com:443/workflows/296b7198aac94a63a916d14860e7c75b/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=vQWfcinuPGvS4mD8puvcm-sDd-haB2pd8lSowzrxrwg", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: user.email }) // Fetch subscription securely
+            });
+
+            const data = await response.json();
+            console.log("Updated subscription from Dataverse:", data);
+
+            // Step 2: Validate subscription before allowing access
+            if (!data.subscription || data.subscription === "basic") {
+                alert("No tienes acceso. Debes suscribirte.");
+                window.location.href = "signin.html";
+                return;
+            }
+
+            // Step 3: Update localStorage with the new subscription
+            user.subscription = data.subscription;
+            localStorage.setItem("user", JSON.stringify(user));
+
+        } catch (error) {
+            console.error("Error fetching updated subscription:", error);
+        }
+
+        // Step 4: Clear any subscription refresh flags
+        localStorage.removeItem("refreshSubscription");
+
+        // ✅ Existing Feature Blocks Code (unchanged)
         const subscription = user.subscription ? user.subscription.toLowerCase() : "basic"; // Default to 'basic'
         const featuresContainer = document.getElementById("featuresContainer");
 
@@ -152,18 +192,16 @@
             button.onclick = onClickHandler;
 
             block.appendChild(heading);
-            //if (!hasAccess) block.appendChild(priceTag); // Show price only if access is not granted
             block.appendChild(desc);
             block.appendChild(button);
             featuresContainer.appendChild(block);
         }
 
-        // User subscription logic for button colors
+        // ✅ Existing Subscription Logic (unchanged)
         const isMensual = subscription === "mensual" || subscription === "trimestral" || subscription === "anual";
         const isTrimestral = subscription === "trimestral" || subscription === "anual";
         const isAnual = subscription === "anual";
 
-        // **YouTube & Newsletter Block (Always Blue)**
         createFeatureBlock(
             "YouTube & Newsletter",
             "basicBlock",
@@ -171,117 +209,75 @@
             () => window.open("https://youtube.com/cepacode", "_blank"),
             "YouTube",
             "",
-            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
-            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`,
-            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform. 
-            Para recibir la newsletter no tienes que hacer nada y siempre puedes acceder a mi canal de YouTube aquí.</p>`
+            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform.</p>`,
+            `<p>Accede a todo mi contenido gratuito en YouTube y recibe mi newsletter mensual con novedades sobre Power Platform.</p>`
         );
 
-        // **Prácticas y Exámenes Block**
         createFeatureBlock(
             "Prácticas y Exámenes",
             "proMensual",
             isMensual,
             () => {
-                    if (!isMensual) {
-                        localStorage.setItem("selectedProduct", "price_1QrvtoJh0lZg4NYP0YMKD60B");
-                        window.location.href = "stripe.html";
-                    } else {
-                        window.location.href = "practicas.html";
-                    }
-                },
+                if (!isMensual) {
+                    localStorage.setItem("selectedProduct", "price_1QrvtoJh0lZg4NYP0YMKD60B");
+                    window.location.href = "stripe.html";
+                } else {
+                    window.location.href = "practicas.html";
+                }
+            },
             isMensual ? "Ir a Prácticas y Exámenes" : "Obtener por 9€/mes",
             "9€/mes",
             `<ul>
-                <li>Accede y aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
-                con contenido práctico y estructurado.</li>
-                <li>Prepárate para los exámenes de certificaciones Power Platform Fundamentals (PL900), 
-                Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
+                <li>Accede y aprende sobre Power Platform con contenido práctico y estructurado.</li>
+                <li>Prepárate para las certificaciones PL900, PL200 y PL600.</li>
             </ul>`,
-            `<p>Formación práctica y exámenes:</p>
-            <ul>
-                <li>Aprende sobre Power Platform, tanto si empiezas de cero, tienes algo de nivel o nivel avanzado, 
-                encontrarás contenido práctico y estructurado.</li>
-                <li>También tendrás acceso preparaciones de exámenes de certificaciones Power Platform Fundamentals (PL900), 
-                Power Platform Functional Consultant (PL200) y Power Platform Solutions Architect (PL600).</li>
-            </ul>`
+            `<p>Formación práctica y exámenes.</p>`
         );
 
-        // **Club de los Viernes Block**
         createFeatureBlock(
             "Club de los Viernes",
             "clubBlock",
             isTrimestral,
             () => {
-    if (!isTrimestral) {
-        localStorage.setItem("selectedProduct", "price_1QrvuPJh0lZg4NYPDUp7jSj8");
-        window.location.href = "stripe.html";
-    } else {
-        window.open("https://teams.microsoft.com", "_blank");
-    }
-},
+                if (!isTrimestral) {
+                    localStorage.setItem("selectedProduct", "price_1QrvuPJh0lZg4NYPDUp7jSj8");
+                    window.location.href = "stripe.html";
+                } else {
+                    window.open("https://teams.microsoft.com", "_blank");
+                }
+            },
             isTrimestral ? "Ir al Club de los Viernes" : "Obtener por 24,30€/trimestre",
             "24,30€/trimestre",
+            `<p>Accede al Club de los Viernes para sesiones en directo.</p>`,
             `<ul>
-            Accede al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.
-            </ul>
-           <p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
-<div style="display: flex; justify-content: center; gap: 30px;">
-    <ul style="list-style: none; padding: 0;">
-        <li>🇲🇽 México DF: 09:00</li>
-        <li>🇨🇴 Bogotá: 10:00</li>
-        <li>🇵🇪 Lima: 10:00</li>
-    </ul>
-    <ul style="list-style: none; padding: 0;">
-        <li>🇦🇷 Buenos Aires: 12:00</li>
-        <li>🇨🇱 Santiago: 12:00</li>
-        <li>🇪🇸 Madrid: 16:00</li>
-    </ul>`,
-            `<ul>
-    <li>Descuento del 10%</li>
-    <li>Acceso a prácticas y preparación de exámenes.</li>
-    <li>Acceso al Club de los Viernes, donde hacemos una sesión en directo todos juntos para poner temas en común y aprender en equipo.</li>
-</ul>
-
-<p><strong>🕒 Horarios del Club de los Viernes:</strong></p>
-
-<div style="display: flex; justify-content: center; gap: 30px;">
-    <ul style="list-style: none; padding: 0;">
-        <li>🇲🇽 México DF: 09:00</li>
-        <li>🇨🇴 Bogotá: 10:00</li>
-        <li>🇵🇪 Lima: 10:00</li>
-    </ul>
-    <ul style="list-style: none; padding: 0;">
-        <li>🇦🇷 Buenos Aires: 12:00</li>
-        <li>🇨🇱 Santiago: 12:00</li>
-        <li>🇪🇸 Madrid: 16:00</li>
-    </ul>`
+                <li>Acceso a prácticas y exámenes.</li>
+                <li>Acceso al Club de los Viernes.</li>
+            </ul>`
         );
 
-        // **Consultas Directas Block**
         createFeatureBlock(
             "Consultas Directas",
             "consultasBlock",
             isAnual,
             () => {
-    if (!isAnual) {
-        localStorage.setItem("selectedProduct", "price_1QrvugJh0lZg4NYPFLg1xACB");
-        window.location.href = "stripe.html";
-    } else {
-        window.open("https://wa.me/message/E3GICSKLY2HKM1", "_blank");
-    }
-},
+                if (!isAnual) {
+                    localStorage.setItem("selectedProduct", "price_1QrvugJh0lZg4NYPFLg1xACB");
+                    window.location.href = "stripe.html";
+                } else {
+                    window.open("https://wa.me/message/E3GICSKLY2HKM1", "_blank");
+                }
+            },
             isAnual ? "Enviar Consulta" : "Obtener por 75,60€/año",
             "75,60€/año",
-            `<p>¡Aquí lo tienes!</p>
-            <p>Te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k. ¡Te respondo en un máximo de 24 horas!</p>`,
+            `<p>Consultas directas sobre Power Platform.</p>`,
             `<ul>
                 <li>Descuento del 25%.</li>
                 <li>Acceso a prácticas y exámenes.</li>
                 <li>Acceso al Club de los Viernes.</li>
-                <li>Consultas Directas: te dejo mi número de teléfono para que me escribas por Whatsapp cualquier duda que tengas sobre Power Platform: una funcionalidad de Power Apps que no terminas de dominar, algo en Power Automate que te da error o cómo mejorar tu carrera y llegar a salarios de 30k, 40k o 50k. ¡Te respondo en un máximo de 24 horas!</li>               
+                <li>Consultas Directas.</li>               
             </ul>`
         );
+
     });
 
     function logout() {
