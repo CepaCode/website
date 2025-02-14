@@ -138,13 +138,7 @@
         document.getElementById("userFullName").innerText = user.fullname || "Usuario";
 
        // 🛡️ Step 1: Securely check user subscription from Dataverse
-// Paso 1: Validar token de sesión
-let token = localStorage.getItem("sessionToken");
-if (!token) {
-    alert("Sesión no válida. Por favor, inicia sesión nuevamente.");
-    window.location.href = "signin.html";
-    return;
-}
+
        try {
     const tokenValidationResponse = await fetch("https://prod-172.westeurope.logic.azure.com:443/workflows/cc2b92fb96324a838a4f91d18e5ce5cf/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=R4CoRy5ZsYd4ES_sdN9BhtLZyKgn0LDcitNqyJ1mneM", {
   method: "POST",
@@ -155,11 +149,8 @@ if (!token) {
   })
 });
 
-if (!tokenValidationResponse.ok) {
-    throw new Error(`Error en la validación del token: ${tokenValidationResponse.status}`);
-}
-
-const data = await tokenValidationResponse.json();    console.log("Updated subscription from Dataverse:", data);
+    const data = await response.json();
+    console.log("Updated subscription from Dataverse:", data);
 
     // Step 2: Validate subscription before allowing access
     if (!data.subscription || data.subscription === "basic") {
